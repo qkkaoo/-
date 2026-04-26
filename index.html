@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siam Elegance — Аутентичная тайская кухня</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --thai-teal: #004e4e; /* Глубокий бирюзовый */
+            --thai-gold: #D4AF37; /* Благородное золото */
+            --thai-accent: #FF9F1C; /* Теплый оранжевый/шафран */
+            --light-sand: #FDFBF7;
+            --dark-wood: #2D241E;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-sand);
+            color: var(--dark-wood);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* 1. Header */
+        header {
+            background-color: rgba(2, 100, 84, 0.95);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--thai-gold);
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: #eee;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--thai-gold);
+        }
+
+        .btn-book {
+            background: transparent;
+            color: var(--thai-gold);
+            padding: 10px 25px;
+            border: 1px solid var(--thai-gold);
+            border-radius: 0px; /* Прямые углы выглядят более премиально */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-book:hover {
+            background-color: var(--thai-gold);
+            color: var(--dark-wood);
+        }
+
+        /* 2. Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            background-attachment: fixed;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 5px;
+            color: var(--thai-gold);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        .btn-menu {
+            background-color: var(--thai-accent);
+            color: white;
+            padding: 18px 50px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .btn-menu:hover {
+            background-color: #e88d12;
+            transform: translateY(-3px);
+        }
+
+        /* 3. Menu Section */
+        .container {
+            max-width: 1100px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            color: var(--thai-teal);
+        }
+
+        h2::after {
+            content: "❦"; /* Тайский декоративный элемент */
+            display: block;
+            font-size: 1.5rem;
+            color: var(--thai-gold);
+            margin-top: 10px;
+        }
+
+        .menu-category {
+            margin-bottom: 60px;
+        }
+
+        .menu-category h3 {
+            color: var(--thai-teal);
+            border-bottom: 2px solid var(--thai-gold);
+            display: inline-block;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            background: transparent;
+            padding: 15px 10px;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background 0.3s ease, padding-left 0.3s ease, border-bottom-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(212, 175, 55, 0.05); /* Легкий золотистый фон */
+            padding-left: 20px; /* Эффект красивого сдвига */
+            padding-right: 10px; /* Компенсируем сдвиг, чтобы цена не уезжала */
+            border-bottom-color: var(--thai-gold);
+        }
+
+        .item-info .name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        .item-info .desc {
+            font-size: 0.85rem;
+            color: #777;
+            font-style: italic;
+        }
+
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: var(--thai-teal);
+            font-size: 1.2rem;
+        }
+
+        /* 4. About Us */
+        .about {
+            background-color: var(--thai-teal);
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+        }
+        .about h2 {
+            color: var(--thai-gold); /* Это окрасит заголовок в фирменный желтый/золотой */
+        }
+
+        .about p {
+            line-height: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        /* 5. Contacts */
+        .contacts {
+            background-color: white;
+            padding: 100px 8%;
+            display: flex;
+            flex-direction: column; /* Выстраиваем элементы в колонку */
+            align-items: center;    /* Центрируем по горизонтали */
+            text-align: center;     /* Центрируем текст внутри */
+
+        }
+        .contact-info {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .address-group {
+        display: flex;
+        justify-content: center;
+        gap: 60px; /* Расстояние между двумя адресами */
+        margin-top: 30px;
+        }
+
+        .address-item h4 {
+            color: var(--thai-teal);   
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .map-placeholder {
+            flex: 1;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1512100356956-c1b27c60968d?auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* 6. Footer */
+        footer {
+            background-color: var(--dark-wood);
+            color: #aaa;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .socials a {
+            color: var(--thai-gold);
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3rem; }
+            .contacts { flex-direction: column; }
+            nav { display: none; }
+        }
+        /* Базовый класс для скрытых элементов */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        /* Класс, который будет добавлять JavaScript при скролле */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Анимация заголовка в Hero при загрузке */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+            opacity: 1;
+                transform: translateY(0);
+        }
+        }
+
+        .hero h1 {
+            animation: fadeInDown 1.2s ease-out forwards;
+        }   
+
+        .hero p {
+            opacity: 0;
+            animation: fadeInDown 1.2s ease-out 0.4s forwards; /* Задержка 0.4с */
+        }
+
+    /* Эффект при наведении на пункты меню */
+        .menu-item {
+            transition: background 0.3s ease, padding-left 0.3s ease;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(212, 175, 55, 0.05); /* Легкий золотистый фон */
+            padding-left: 10px;
+            border-bottom-color: var(--thai-gold);
+        }
+
+    /* Мягкое пульсирование кнопки бронирования */
+        .btn-book {
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">НАЗВАНИЕ РЕСТОРАНА</div>
+        <nav>
+            <a href="#">Главная</a>
+            <a href="#menu">Меню</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+        <a href="booking.html" target="_blank" class="btn-book">ЗАБРОНИРОВАТЬ СТОЛ</a>
+    </header>
+
+    <section class="hero">
+        <h1>Дух экзотики</h1>
+        <p>Путешествие в самое сердце Таиланда. Откройте для себя аутентичные вкусы, ароматные травы и легендарное гостеприимство Страны улыбок.</p>
+        <a href="#menu" class="btn-menu">ОТКРЫТЬ МЕНЮ</a>
+    </section>
+
+    <div class="container" id="menu">
+        <h2 class="reveal">Наше меню</h2>
+
+        <div class="menu-category reveal">
+            <h3>🌿 Фирменные блюда</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="name">Том Ям Гунг</span>
+                        <span class="desc">Пряный суп с лемонграссом и королевскими креветками</span>
+                    </div>
+                    <span class="price">850 ₽</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="name">Пад Тай Боран</span>
+                        <span class="desc">Традиционная обжаренная рисовая лапша с тамариндом</span>
+                    </div>
+                    <span class="price">720 ₽</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="name">Зеленый карри</span>
+                        <span class="desc">Острый кокосовый карри с побегами бамбука и базиликом</span>
+                    </div>
+                    <span class="price">780 ₽</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="name">Массаман с говядиной</span>
+                        <span class="desc">Томленая говядина в насыщенном, мягком арахисовом карри</span>
+                    </div>
+                    <span class="price">950 ₽</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <h3>🥟 Закуски</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="name">Тайские спринг-роллы</span>
+                        <span class="desc">Хрустящие роллы с овощами и стеклянной лапшой</span>
+                    </div>
+                    <span class="price">450 ₽</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="name">Куриный сатай</span>
+                        <span class="desc">Шашлычки на гриле со сливочным арахисовым соусом</span>
+                    </div>
+                    <span class="price">520 ₽</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="about reveal">
+        <h2>Концепция</h2>
+        <p>
+            В Siam Elegance мы объединяем древние кулинарные традиции Таиланда с современной эстетикой. Наши ингредиенты еженедельно доставляются самолетами из Бангкока, чтобы каждый листик лайма и перец чили передавали истинный вкус Таиланда.
+        </p>
+    </section>
+
+    <section class="contacts reveal" id="contacts">
+        <div class="contact-info">
+            <h2>Наш адрес</h2>
+            
+            <div class="address-group">
+                <div class="address-item">
+                    <h4>Siam Downtown</h4>
+                    <p>Набережная Риверсайд, 42<br>Район Бангкок</p>
+                    <p><strong>Телефон:</strong> +7 (999) 000-01-01</p>
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="socials">
+            <a href="#">Instagram</a>  <a href="#">Facebook</a>  <a href="#">Telegram</a>
+        </div>
+        <p style="margin-top: 30px; font-size: 0.7rem; letter-spacing: 1px;">
+            <a href="#" style="color: #666; text-decoration: none;">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a><br><br>
+            © 2026 НАЗВАНИЕ РЕСТОРАНА. ВСЕ ПРАВА ЗАЩИЩЕНЫ.
+        </p>
+    </footer>
+   
+   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const reveals = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    // Отключаем наблюдение после появления, чтобы анимация проигралась один раз
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.15 }); // Анимация начнется, когда видно 15% элемента
+
+        reveals.forEach(reveal => observer.observe(reveal));
+    });
+    </script>
+
+</body>
+</html>
