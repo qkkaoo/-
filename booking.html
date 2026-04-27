@@ -67,6 +67,25 @@
             transform: translateY(-2px);
         }
         #status-msg { margin-top: 15px; font-weight: bold; }
+       
+       
+        @media (max-width: 480px) {
+         body {
+            align-items: flex-start; /* Чтобы форма не уезжала за верхний край при открытии клавиатуры */
+            padding-top: 40px;
+        }
+        
+        .booking-card {
+            padding: 30px 20px;
+            margin: 0 15px; /* Защитный отступ от краев экрана */
+            width: calc(100% - 30px); /* Компенсируем margin */
+        }
+
+        input {
+            padding: 12px;
+            font-size: 16px; /* Важно: iOS приближает экран, если font-size у input меньше 16px */
+        }
+     }
     </style>
 </head>
 <body>

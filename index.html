@@ -123,6 +123,7 @@
             font-weight: 600;
             transition: transform 0.3s, background 0.3s;
         }
+        
 
         .btn-menu:hover {
             background-color: #e88d12;
@@ -281,12 +282,63 @@
             text-transform: uppercase;
         }
 
-        @media (max-width: 768px) {
-            .menu-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 3rem; }
-            .contacts { flex-direction: column; }
-            nav { display: none; }
+       @media (max-width: 768px) {
+        /* 1. Отключаем fixed для iOS, иначе фон может растянуться и ломать скролл */
+        .hero { 
+            background-attachment: scroll; 
         }
+
+        /* 2. Адаптируем типографику, чтобы текст не вылезал за края */
+        .hero h1 { font-size: 2.5rem; }
+        .hero p { font-size: 1rem; margin-bottom: 25px; padding: 0 15px; }
+        h2 { font-size: 2.2rem; margin-bottom: 40px; }
+        .menu-category h3 { font-size: 1.5rem; margin-bottom: 20px; }
+
+        /* 3. Оптимизируем шапку: уменьшаем лого и кнопку, чтобы они поместились */
+        header {
+            padding: 15px 5%;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .logo { font-size: 20px; }
+        
+        /* Пока скрываем навигацию (см. вопрос в конце) */
+        nav { display: none; }
+        
+        .btn-book {
+            padding: 8px 15px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        /* 4. Перестраиваем сетку меню в одну колонку */
+        .menu-grid { 
+            grid-template-columns: 1fr; 
+            gap: 20px; 
+        }
+        
+        /* Разносим название и цену для лучшей читаемости на узких экранах */
+        .menu-item { 
+            flex-direction: column; 
+            align-items: flex-start; 
+            padding-left: 0;
+        }
+        .menu-item:hover {
+            padding-left: 5px; /* Уменьшаем сдвиг анимации для мобилок */
+        }
+        .price { 
+            margin-top: 10px; 
+            align-self: flex-end; 
+        }
+
+        /* 5. Выстраиваем контакты и адреса в колонку */
+        .contacts { padding: 60px 5%; }
+        .address-group { 
+            flex-direction: column; 
+            gap: 30px; 
+        }
+    }
         /* Базовый класс для скрытых элементов */
         .reveal {
             opacity: 0;
