@@ -29,25 +29,39 @@
 
         /* 1. Header */
         header {
-            background-color: rgba(2, 100, 84, 0.95);
-            backdrop-filter: blur(5px);
+            background-color: var(--thai-teal);
             color: white;
-            padding: 20px 8%;
+            padding: 60px 20px;
+            text-align: center;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            flex-direction: column;
+            align-items: center; /* Центрирует всё содержимое по горизонтали */
+            justify-content: center;
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: var(--thai-gold);
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            display: block;
+            width: 100%; /* Занимает всю ширину для точного центра */
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center; /* Центрирует кнопки меню */
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap; /* Чтобы на телефонах кнопки не уезжали за край */
+        }
+
+        .nav-links a {
+            color: var(--thai-gold);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
         nav a {
