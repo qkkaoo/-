@@ -7,11 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --thai-teal: #004e4e; /* Глубокий бирюзовый */
-            --thai-gold: #D4AF37; /* Благородное золото */
-            --thai-accent: #FF9F1C; /* Теплый оранжевый/шафран */
+            --thai-teal: #004e4e;
+            --thai-gold: #D4AF37;
+            --thai-accent: #FF9F1C;
             --light-sand: #FDFBF7;
             --dark-wood: #2D241E;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Плавная прокрутка */
+            scroll-padding-top: 140px; /* Отступ, чтобы шапка не перекрывала заголовки */
         }
 
         body {
@@ -20,72 +25,85 @@
             padding: 0;
             background-color: var(--light-sand);
             color: var(--dark-wood);
-            scroll-behavior: smooth;
+            /* Отсюда scroll-behavior можно удалить */
         }
 
         h1, h2, h3, .logo {
             font-family: 'Playfair Display', serif;
         }
 
-        /* 1. Header */
+                /* 1. Компактный Header */
         header {
-            background-color: var(--thai-teal);
+            background-color: rgba(2, 100, 84, 0.95);
+            backdrop-filter: blur(5px);
             color: white;
-            padding: 80px 20px; /* Увеличили вертикальные отступы всей шапки */
-            text-align: center;
+            padding: 15px 20px; /* Уменьшили с 30px до 15px */
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        .logo {
-            font-size: 3.5rem;
-            margin-bottom: 30px; /* Увеличили отступ под названием ресторана */
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
             justify-content: center;
-            align-items: center; /* Центрируем по вертикали, если кнопка выше ссылок */
-            gap: 40px; /* Увеличили расстояние между самими ссылками */
-            margin-bottom: 40px; /* Добавили отступ снизу, если под ссылками что-то есть */
+            gap: 10px; /* Уменьшили разрыв между лого и кнопками с 20px до 10px */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        /* 2. Увеличенное название ресторана */
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem; /* Увеличили размер (был стандартный или маленький) */
+            font-weight: 700;
+            letter-spacing: 6px; /* Добавили благородный разряд букв */
+            text-transform: uppercase;
+            color: var(--thai-gold); /* Сделаем название золотым для акцента */
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* 2. Контейнер для ссылок и кнопки */
+        header nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-wrap: wrap;
+            gap: 30px; /* Стандартный зазор между пунктами меню */
         }
 
-        /* Если кнопка "Забронировать" у вас имеет класс .btn-order или похожий */
-        .btn-order {
-            margin-top: 20px; /* Отодвигаем кнопку от ссылок сверху */
-            padding: 15px 40px; /* Делаем саму кнопку более солидной */
-            display: inline-block; /* Чтобы отступы работали корректно */
-        }
-
+        /* Убираем старые отступы у ссылок, так как теперь используем gap */
         nav a {
+            margin: 0 !important; 
             color: #eee;
             text-decoration: none;
-            margin: 0 20px;
             font-size: 0.9rem;
             font-weight: 400;
             letter-spacing: 1px;
             transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: var(--thai-gold);
-        }
-
+        /* 3. Кнопка "Забронировать" с увеличенным отступом */
         .btn-book {
+            margin-left: 50px; /* Вот этот отступ отодвинет кнопку от последних ссылок меню */
             background: transparent;
             color: var(--thai-gold);
-            padding: 10px 25px;
+            padding: 12px 30px;
             border: 1px solid var(--thai-gold);
-            border-radius: 0px; /* Прямые углы выглядят более премиально */
             text-decoration: none;
             font-weight: 600;
             font-size: 0.8rem;
             letter-spacing: 2px;
             transition: all 0.3s;
+            animation: pulse 3s infinite;
+        }
+
+        /* 3. Адаптив для мобильных (чтобы на смартфонах не было слишком крупно) */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.8rem; /* На телефонах чуть меньше */
+                letter-spacing: 3px;
+            }
+            header {
+                padding: 10px 5%;
+            }
         }
 
         .btn-book:hover {
@@ -446,8 +464,8 @@
             <a href="#">Главная</a>
             <a href="#menu">Меню</a>
             <a href="#contacts">Контакты</a>
-        </nav>
-        <a href="booking.html" target="_blank" class="btn-book">ЗАБРОНИРОВАТЬ СТОЛ</a>
+            <a href="booking.html" target="_blank" class="btn-book">ЗАБРОНИРОВАТЬ СТОЛ</a>
+        </nav>  
     </header>
 
     <section class="hero">
