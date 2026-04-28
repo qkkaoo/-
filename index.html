@@ -31,37 +31,34 @@
         header {
             background-color: var(--thai-teal);
             color: white;
-            padding: 60px 20px;
+            padding: 80px 20px; /* Увеличили вертикальные отступы всей шапки */
             text-align: center;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Центрирует всё содержимое по горизонтали */
-            justify-content: center;
+            align-items: center;
         }
 
         .logo {
             font-size: 3.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 30px; /* Увеличили отступ под названием ресторана */
             letter-spacing: 4px;
             text-transform: uppercase;
-            display: block;
-            width: 100%; /* Занимает всю ширину для точного центра */
         }
 
         .nav-links {
             display: flex;
-            justify-content: center; /* Центрирует кнопки меню */
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap; /* Чтобы на телефонах кнопки не уезжали за край */
+            justify-content: center;
+            align-items: center; /* Центрируем по вертикали, если кнопка выше ссылок */
+            gap: 40px; /* Увеличили расстояние между самими ссылками */
+            margin-bottom: 40px; /* Добавили отступ снизу, если под ссылками что-то есть */
+            flex-wrap: wrap;
         }
 
-        .nav-links a {
-            color: var(--thai-gold);
-            text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: 0.3s;
+        /* Если кнопка "Забронировать" у вас имеет класс .btn-order или похожий */
+        .btn-order {
+            margin-top: 20px; /* Отодвигаем кнопку от ссылок сверху */
+            padding: 15px 40px; /* Делаем саму кнопку более солидной */
+            display: inline-block; /* Чтобы отступы работали корректно */
         }
 
         nav a {
