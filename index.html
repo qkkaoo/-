@@ -15,8 +15,8 @@
         }
 
         html {
-            scroll-behavior: smooth; /* Плавная прокрутка */
-            scroll-padding-top: 140px; /* Отступ, чтобы шапка не перекрывала заголовки */
+            scroll-behavior: smooth;
+            scroll-padding-top: 140px;
         }
 
         body {
@@ -25,53 +25,50 @@
             padding: 0;
             background-color: var(--light-sand);
             color: var(--dark-wood);
-            /* Отсюда scroll-behavior можно удалить */
         }
 
         h1, h2, h3, .logo {
             font-family: 'Playfair Display', serif;
         }
 
-                /* 1. Компактный Header */
+        /* ───── Header ───── */
         header {
             background-color: rgba(2, 100, 84, 0.95);
             backdrop-filter: blur(5px);
             color: white;
-            padding: 15px 20px; /* Уменьшили с 30px до 15px */
+            padding: 15px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px; /* Уменьшили разрыв между лого и кнопками с 20px до 10px */
+            gap: 10px;
             position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-        /* 2. Увеличенное название ресторана */
+
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem; /* Увеличили размер (был стандартный или маленький) */
+            font-size: 2.8rem;
             font-weight: 700;
-            letter-spacing: 6px; /* Добавили благородный разряд букв */
+            letter-spacing: 6px;
             text-transform: uppercase;
-            color: var(--thai-gold); /* Сделаем название золотым для акцента */
+            color: var(--thai-gold);
             margin: 0;
             line-height: 1.2;
         }
 
-        /* 2. Контейнер для ссылок и кнопки */
         header nav {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 30px; /* Стандартный зазор между пунктами меню */
+            gap: 30px;
         }
 
-        /* Убираем старые отступы у ссылок, так как теперь используем gap */
         nav a {
-            margin: 0 !important; 
+            margin: 0 !important;
             color: #eee;
             text-decoration: none;
             font-size: 0.9rem;
@@ -80,9 +77,8 @@
             transition: color 0.3s;
         }
 
-        /* 3. Кнопка "Забронировать" с увеличенным отступом */
         .btn-book {
-            margin-left: 50px; /* Вот этот отступ отодвинет кнопку от последних ссылок меню */
+            margin-left: 50px;
             background: transparent;
             color: var(--thai-gold);
             padding: 12px 30px;
@@ -95,27 +91,23 @@
             animation: pulse 3s infinite;
         }
 
-        /* 3. Адаптив для мобильных (чтобы на смартфонах не было слишком крупно) */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 1.8rem; /* На телефонах чуть меньше */
-                letter-spacing: 3px;
-            }
-            header {
-                padding: 10px 5%;
-            }
-        }
-
         .btn-book:hover {
             background-color: var(--thai-gold);
             color: var(--dark-wood);
         }
 
-        /* 2. Hero Section */
+        @media (max-width: 768px) {
+            .logo { font-size: 1.8rem; letter-spacing: 3px; }
+            header { padding: 10px 5%; }
+        }
+
+        /* ───── Hero ───── */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url('https://avatars.mds.yandex.net/get-altay/16330083/2a0000019a4ffd88780a94409d52f17072ed/XXXL');
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('https://avatars.mds.yandex.net/get-altay/16330083/2a0000019a4ffd88780a94409d52f17072ed/XXXL');
             background-size: cover;
             background-position: center;
+            background-attachment: scroll;
             height: 90vh;
             display: flex;
             flex-direction: column;
@@ -124,8 +116,6 @@
             text-align: center;
             color: white;
             padding: 0 20px;
-            background-attachment: fixed;
-            background-attachment: scroll;
         }
 
         .hero h1 {
@@ -133,6 +123,7 @@
             margin-bottom: 5px;
             color: var(--thai-gold);
             font-style: italic;
+            animation: fadeInDown 1.2s ease-out forwards;
         }
 
         .hero p {
@@ -141,6 +132,8 @@
             max-width: 700px;
             letter-spacing: 1px;
             font-weight: 300;
+            opacity: 0;
+            animation: fadeInDown 1.2s ease-out 0.4s forwards;
         }
 
         .btn-menu {
@@ -153,14 +146,13 @@
             font-weight: 600;
             transition: transform 0.3s, background 0.3s;
         }
-        
 
         .btn-menu:hover {
             background-color: #e88d12;
             transform: translateY(-3px);
         }
 
-        /* 3. Menu Section */
+        /* ───── Menu Section ───── */
         .container {
             max-width: 1100px;
             margin: 100px auto;
@@ -170,18 +162,145 @@
         h2 {
             text-align: center;
             font-size: 3rem;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             color: var(--thai-teal);
         }
 
         h2::after {
-            content: "❦"; /* Тайский декоративный элемент */
+            content: "❦";
             display: block;
             font-size: 1.5rem;
             color: var(--thai-gold);
             margin-top: 10px;
         }
 
+        /* ═══════════════════════════════════════
+           СИСТЕМА ВКЛАДОК
+        ═══════════════════════════════════════ */
+
+        /* Обёртка для панели вкладок — sticky под хедером */
+        .tabs-wrapper {
+            position: sticky;
+            top: 80px; /* примерная высота хедера */
+            z-index: 900;
+            background: var(--light-sand);
+            padding: 12px 0 0;
+            margin-bottom: 40px;
+            /* Тонкая линия-разделитель снизу */
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        /* Горизонтально прокручиваемая полоса кнопок */
+        .tabs-nav {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            border-bottom: 2px solid rgba(0,78,78,0.12);
+            padding: 0 4px;
+        }
+
+        .tabs-nav::-webkit-scrollbar { display: none; }
+
+        /* Кнопка вкладки */
+        .tab-btn {
+            flex-shrink: 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--thai-teal);
+            padding: 14px 28px;
+            position: relative;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            outline: none;
+            opacity: 0.55;
+        }
+
+        /* Нижнее подчёркивание — золотая черта активной вкладки */
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--thai-gold);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 2px 2px 0 0;
+        }
+
+        .tab-btn:hover {
+            color: var(--thai-teal);
+            opacity: 0.8;
+        }
+
+        /* Активная вкладка */
+        .tab-btn.active {
+            color: var(--thai-teal);
+            opacity: 1;
+        }
+
+        .tab-btn.active::after {
+            transform: scaleX(1);
+        }
+
+        /* Emoji-иконка в кнопке */
+        .tab-btn .tab-icon {
+            margin-right: 6px;
+            font-style: normal;
+        }
+
+        /* ───── Панели контента ───── */
+        .tab-panel {
+            display: none;
+            animation: tabFadeIn 0.45s ease forwards;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes tabFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Пустая вкладка — заглушка */
+        .empty-tab {
+            text-align: center;
+            padding: 80px 20px;
+            color: #aaa;
+        }
+
+        .empty-tab .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+            opacity: 0.4;
+        }
+
+        .empty-tab p {
+            font-size: 1rem;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        /* ───── Категория внутри вкладки ───── */
         .menu-category {
             margin-bottom: 60px;
         }
@@ -194,6 +313,7 @@
             font-size: 1.8rem;
         }
 
+        /* ───── Сетка блюд ───── */
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -207,17 +327,18 @@
             background: transparent;
             padding: 15px 10px;
             border-bottom: 1px solid #e0e0e0;
-            transition: transform 0.3s ease, background 0.3s ease, padding-left 0.3s ease, border-bottom-color 0.3s ease; /* Добавили transform */
+            transition: transform 0.3s ease, background 0.3s ease,
+                        padding-left 0.3s ease, border-bottom-color 0.3s ease;
             cursor: pointer;
-            will-change: transform; /* Подсказка браузеру для оптимизации */
+            will-change: transform;
         }
 
         .menu-item:hover {
-            background-color: rgba(212, 175, 55, 0.05); /* Легкий золотистый фон */
-            padding-left: 20px; /* Эффект красивого сдвига */
-            padding-right: 10px; /* Компенсируем сдвиг, чтобы цена не уезжала */
+            background-color: rgba(212, 175, 55, 0.05);
+            padding-left: 20px;
+            padding-right: 10px;
             border-bottom-color: var(--thai-gold);
-            transform: scale(1.05); /* Эффект увеличения всего блока блюда */
+            transform: scale(1.05);
         }
 
         .item-info .name {
@@ -239,7 +360,27 @@
             font-size: 1.2rem;
         }
 
-        /* 4. About Us */
+        /* Элементы с картинкой */
+        .menu-item.has-image {
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+
+        .item-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--thai-gold);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item.has-image .item-info { flex-grow: 1; }
+        .menu-item.has-image .price { margin-left: auto; }
+
+        /* ───── About ───── */
         .about {
             background-color: var(--thai-teal);
             color: white;
@@ -247,9 +388,8 @@
             text-align: center;
             background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
         }
-        .about h2 {
-            color: var(--thai-gold); /* Это окрасит заголовок в фирменный желтый/золотой */
-        }
+
+        .about h2 { color: var(--thai-gold); }
 
         .about p {
             line-height: 2;
@@ -259,45 +399,33 @@
             font-weight: 300;
         }
 
-        /* 5. Contacts */
+        /* ───── Contacts ───── */
         .contacts {
             background-color: white;
             padding: 100px 8%;
             display: flex;
-            flex-direction: column; /* Выстраиваем элементы в колонку */
-            align-items: center;    /* Центрируем по горизонтали */
-            text-align: center;     /* Центрируем текст внутри */
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
 
-        }
-        .contact-info {
-            max-width: 600px;
-            width: 100%;
-        }
+        .contact-info { max-width: 600px; width: 100%; }
 
         .address-group {
-        display: flex;
-        justify-content: center;
-        gap: 60px; /* Расстояние между двумя адресами */
-        margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 30px;
         }
 
         .address-item h4 {
-            color: var(--thai-teal);   
+            color: var(--thai-teal);
             font-family: 'Playfair Display', serif;
             margin-bottom: 10px;
             font-size: 1.2rem;
         }
 
-        .map-placeholder {
-            flex: 1;
-            height: 400px;
-            background: url('https://images.unsplash.com/photo-1512100356956-c1b27c60968d?auto=format&fit=crop&w=800&q=80');
-            background-size: cover;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        /* 6. Footer */
+        /* ───── Footer ───── */
         footer {
             background-color: var(--dark-wood);
             color: #aaa;
@@ -314,143 +442,87 @@
             text-transform: uppercase;
         }
 
-       @media (max-width: 768px) {
-        /* 1. Отключаем fixed для iOS, иначе фон может растянуться и ломать скролл */
-        .hero { 
-            background-attachment: scroll; 
-        }
-
-        /* 2. Адаптируем типографику, чтобы текст не вылезал за края */
-        .hero h1 { font-size: 2.5rem; }
-        .hero p { font-size: 1rem; margin-bottom: 25px; padding: 0 15px; }
-        h2 { font-size: 2.2rem; margin-bottom: 40px; }
-        .menu-category h3 { font-size: 1.5rem; margin-bottom: 20px; }
-
-        /* 3. Оптимизируем шапку: уменьшаем лого и кнопку, чтобы они поместились */
-        header {
-            padding: 15px 5%;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        .logo { font-size: 20px; }
-        
-        /* Пока скрываем навигацию (см. вопрос в конце) */
-        nav { display: none; }
-        
-        .btn-book {
-            padding: 8px 15px;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-        }
-
-        /* 4. Перестраиваем сетку меню в одну колонку */
-        .menu-grid { 
-            grid-template-columns: 1fr; 
-            gap: 20px; 
-        }
-        
-        /* Разносим название и цену для лучшей читаемости на узких экранах */
-        .menu-item { 
-            flex-direction: column; 
-            align-items: flex-start; 
-            padding-left: 0;
-        }
-        .menu-item:hover {
-            padding-left: 5px; /* Уменьшаем сдвиг анимации для мобилок */
-            transform: scale(1.02); /* Чуть меньше увеличение на мобильных */
-        }
-        .price { 
-            margin-top: 10px; 
-            align-self: flex-end; 
-        }
-
-        /* 5. Выстраиваем контакты и адреса в колонку */
-        .contacts { padding: 60px 5%; }
-        .address-group { 
-            flex-direction: column; 
-            gap: 30px; 
-        }
-
-        /* Адаптивный размер изображений блюд */
-        .item-image {
-            width: 120px !important;
-            height: 120px !important;
-        }
-    }
-        /* Базовый класс для скрытых элементов */
+        /* ───── Reveal animation ───── */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease-out;
         }
 
-        /* Класс, который будет добавлять JavaScript при скролле */
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Анимация заголовка в Hero при загрузке */
+        /* ───── Keyframes ───── */
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-            opacity: 1;
-                transform: translateY(0);
-        }
-        }
-
-        .hero h1 {
-            animation: fadeInDown 1.2s ease-out forwards;
-        }   
-
-        .hero p {
-            opacity: 0;
-            animation: fadeInDown 1.2s ease-out 0.4s forwards; /* Задержка 0.4с */
-        }
-        /* Стили для элементов меню с картинками */
-        .menu-item.has-image {
-            align-items: center;
-            justify-content: flex-start;
-            gap: 20px;
-        }
-
-        .item-image {
-            width: 180px; /* ИЗМЕНЕНО: Картинки стали больше (было 70px) */
-            height: 180px; /* ИЗМЕНЕНО: Картинки стали больше (было 70px) */
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--thai-gold);
-            flex-shrink: 0;
-            transition: transform 0.3s ease; /* transition оставлен для старых браузеров */
-        }
-
-        /* СТАРЫЙ ЭФФЕКТ УВЕЛИЧЕНИЯ ТОЛЬКО КАРТИНКИ УДАЛЕН */
-
-        .menu-item.has-image .item-info {
-            flex-grow: 1;
-        }
-
-        .menu-item.has-image .price {
-            margin-left: auto;
-        }
-
-
-    /* Эффект при наведении на пункты меню */
-        /* Объединен со старым CSS (.menu-item), чтобы избежать дублирования */
-
-    /* Мягкое пульсирование кнопки бронирования */
-        .btn-book {
-            animation: pulse 3s infinite;
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+            0%   { box-shadow: 0 0 0 0   rgba(212, 175, 55, 0.4); }
+            70%  { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0   rgba(212, 175, 55, 0); }
+        }
+
+        /* ───── Mobile ───── */
+        @media (max-width: 768px) {
+            .hero { background-attachment: scroll; }
+            .hero h1  { font-size: 2.5rem; }
+            .hero p   { font-size: 1rem; margin-bottom: 25px; padding: 0 15px; }
+            h2        { font-size: 2.2rem; margin-bottom: 40px; }
+            .menu-category h3 { font-size: 1.5rem; margin-bottom: 20px; }
+
+            header {
+                padding: 15px 5%;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            .logo { font-size: 20px; }
+            nav   { display: none; }
+
+            .btn-book {
+                padding: 8px 15px;
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 0;
+            }
+
+            .menu-item:hover {
+                padding-left: 5px;
+                transform: scale(1.02);
+            }
+
+            .price { margin-top: 10px; align-self: flex-end; }
+
+            .contacts     { padding: 60px 5%; }
+            .address-group { flex-direction: column; gap: 30px; }
+
+            .item-image {
+                width: 120px !important;
+                height: 120px !important;
+            }
+
+            .tab-btn {
+                padding: 12px 18px;
+                font-size: 0.75rem;
+            }
+
+            .tabs-wrapper {
+                top: 60px;
+            }
         }
     </style>
 </head>
@@ -463,7 +535,7 @@
             <a href="#menu">Меню</a>
             <a href="#contacts">Контакты</a>
             <a href="booking.html" target="_blank" class="btn-book">ЗАБРОНИРОВАТЬ СТОЛ</a>
-        </nav>  
+        </nav>
     </header>
 
     <section class="hero">
@@ -473,236 +545,339 @@
     </section>
 
     <div class="container" id="menu">
-        
+
         <h2 class="reveal">Наше меню</h2>
-        <div class="menu-category reveal">
-            <h3>🍜 Супы</h3>
-            <div class="menu-grid">
-                
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5512660/2a00000182201090c89629c074f654cd5aed/orig" alt="Том Ям креветки" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Том Ям креветки <span style="font-weight: 300; font-size: 0.9em;">(500 мл)</span></span>
-                        <span class="desc">Куриный бульон, черри, креветки, кокосовое молоко, тайские пряности, грибы, зелень. Рис.</span>
-                    </div>
-                    <span class="price">950 ₽</span>
-                </div>
 
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5373629/2a00000182200f9c695bb2e8c8ca9b72305c/orig" alt="Том Ям с морепродуктами" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Том Ям с морепродуктами <span style="font-weight: 300; font-size: 0.9em;">(500 мл)</span></span>
-                        <span class="desc">Куриный бульон, креветки, мидии, кальмары, черри, кокосовое молоко, тайские пряности, грибы, зелень. Рис.</span>
-                    </div>
-                    <span class="price">950 ₽</span>
-                </div>
-
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/4472294/2a0000018220081e87f9cda11840dd0b7871/orig" alt="Том Ям Пан морепродукты" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Том Ям Пан морепродукты <span style="font-weight: 300; font-size: 0.9em;">(1000 мл)</span></span>
-                        <span class="desc">На компанию 2-3 чел. Куриный бульон, креветки, мидии, кальмары, черри, кокосовое молоко, тайские пряности, грибы, зелень.</span>
-                    </div>
-                    <span class="price">1650 ₽</span>
-                </div>
-
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/9495815/2a0000018a896184fd6e517c79684222e426/orig" alt="Том Ям Пан креветки" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Том Ям Пан креветки <span style="font-weight: 300; font-size: 0.9em;">(1000 мл)</span></span>
-                        <span class="desc">На компанию 2-3 чел. Куриный бульон, креветки, черри, кокосовое молоко, тайские пряности, грибы, зелень.</span>
-                    </div>
-                    <span class="price">1650 ₽</span>
-                </div>
-
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5514775/2a000001822005013777a30bb68ba7826dc1/orig" alt="Том Кха креветки" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Том Кха креветки <span style="font-weight: 300; font-size: 0.9em;">(500 мл)</span></span>
-                        <span class="desc">Куриный бульон, имбирь, креветки, кокосовое молоко, тайские пряности, грибы, зелень.</span>
-                    </div>
-                    <span class="price">850 ₽</span>
-                </div>
-
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a893a5470d2c0ee2d4e60ba6607/orig" alt="Том Кха морепродукты" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Том Кха морепродукты <span style="font-weight: 300; font-size: 0.9em;">(500 мл)</span></span>
-                        <span class="desc">Куриный бульон, имбирь, креветки, мидии, кальмары, кокосовое молоко, тайские пряности, грибы, зелень.</span>
-                    </div>
-                    <span class="price">850 ₽</span>
-                </div>
-
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a893c802bbcf03c29202f28c4ca/orig" alt="Том Кха Пан креветки" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Том Кха Пан креветки <span style="font-weight: 300; font-size: 0.9em;">(1000 мл)</span></span>
-                        <span class="desc">На компанию 2-3 чел. Куриный бульон, креветки, кокосовое молоко, тайские пряности, грибы, зелень.</span>
-                    </div>
-                    <span class="price">1650 ₽</span>
-                </div>
-
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a893bd4894e28e70d932cc8cacd/orig" alt="Том Кха курица" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Том Кха курица <span style="font-weight: 300; font-size: 0.9em;">(500 мл)</span></span>
-                        <span class="desc">Куриный бульон, имбирь, филе курицы, кокосовое молоко, тайские пряности, грибы, зелень.</span>
-                    </div>
-                    <span class="price">650 ₽</span>
-                </div>
-
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a8952f800607cee1c34a91f9545/orig" alt="Том Кха веган" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Том Кха веган <span style="font-weight: 300; font-size: 0.9em;">(500 мл)</span></span>
-                        <span class="desc">Вода, тофу, кокосовое молоко, тайские пряности, грибы, зелень.</span>
-                    </div>
-                    <span class="price">650 ₽</span>
-                </div>
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/9495815/2a0000018a893b196ab2acf3fa91e73edafb/orig" alt="Грин карри курица" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Грин карри курица<span style="font-weight: 300; font-size: 0.9em;">(500 мл)</span></span>
-                        <span class="desc">Куриный бульон. Филе курицы. коксовое молоко, тайские пряности, тайский баклажаны,карри паста, зелень.</span>
-                    </div>
-                    <span class="price">650 ₽</span>
-                </div>
-                 <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a893a5470d2c0ee2d4e60ba6607/orig" alt="Грин карри морепродукты" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Грин карри морепродукты<span style="font-weight: 300; font-size: 0.9em;">(500 мл)</span></span>
-                        <span class="desc">Куриный бульон. креветки. мидии. кальмары. коксовое молоко, тайские пряности, тайские баклажаны, карри паста, зелень.</span>
-                    </div>
-                    <span class="price">850 ₽</span>
-                </div>
-                 <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a8952f800607cee1c34a91f9545/orig" alt="Грин карри веган" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Грин карри веган<span style="font-weight: 300; font-size: 0.9em;">(500 мл)</span></span>
-                        <span class="desc">Вода. тофу. кокосовое молоко, тайские пряности, тайские баклажаны, карри паста, зелень.</span>
-                    </div>
-                    <span class="price">850 ₽</span>
-                </div>
-
+        <!-- ═══ ПАНЕЛЬ ВКЛАДОК ═══ -->
+        <div class="tabs-wrapper" id="tabs-wrapper">
+            <div class="tabs-nav" role="tablist">
+                <button class="tab-btn active" role="tab" data-tab="soups"    aria-selected="true">
+                    <span class="tab-icon">🍜</span>Супы
+                </button>
+                <button class="tab-btn"        role="tab" data-tab="hot"      aria-selected="false">
+                    <span class="tab-icon">🍛</span>Горячее
+                </button>
+                <button class="tab-btn"        role="tab" data-tab="starters" aria-selected="false">
+                    <span class="tab-icon">🥗</span>Закуски
+                </button>
+                <button class="tab-btn"        role="tab" data-tab="desserts" aria-selected="false">
+                    <span class="tab-icon">🍮</span>Десерты
+                </button>
+                <button class="tab-btn"        role="tab" data-tab="drinks"   aria-selected="false">
+                    <span class="tab-icon">🥤</span>Напитки
+                </button>
             </div>
         </div>
 
-        <div class="menu-category">
-            <div class="menu-category reveal">
-            <h3>🍛 Горячее</h3>
-            <div class="menu-grid">
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/9854027/2a0000018a896547c2658d083896fba75515/orig" alt="Пад Тай с креветками" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Пад Тай с креветками<span style="font-weight: 300; font-size: 0.9em;">(300 г)</span></span>
-                        <span class="desc">Рисовая лапша, тофу, креветки, лук, чеснок, яйцо, проростки, арахис, лайм, тамариновый соус, лук зеленый.</span>
+        <!-- ═══ ВКЛАДКА: СУПЫ ═══ -->
+        <div class="tab-panel active" id="tab-soups" role="tabpanel">
+            <div class="menu-category">
+                <h3>🍜 Супы</h3>
+                <div class="menu-grid">
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5512660/2a00000182201090c89629c074f654cd5aed/orig" alt="Том Ям креветки" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Том Ям креветки <span style="font-weight:300;font-size:0.9em">(500 мл)</span></span>
+                            <span class="desc">Куриный бульон, черри, креветки, кокосовое молоко, тайские пряности, грибы, зелень. Рис.</span>
+                        </div>
+                        <span class="price">950 ₽</span>
                     </div>
-                    <span class="price">750 ₽</span>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5373629/2a00000182200f9c695bb2e8c8ca9b72305c/orig" alt="Том Ям с морепродуктами" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Том Ям с морепродуктами <span style="font-weight:300;font-size:0.9em">(500 мл)</span></span>
+                            <span class="desc">Куриный бульон, креветки, мидии, кальмары, черри, кокосовое молоко, тайские пряности, грибы, зелень. Рис.</span>
+                        </div>
+                        <span class="price">950 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/4472294/2a0000018220081e87f9cda11840dd0b7871/orig" alt="Том Ям Пан морепродукты" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Том Ям Пан морепродукты <span style="font-weight:300;font-size:0.9em">(1000 мл)</span></span>
+                            <span class="desc">На компанию 2–3 чел. Куриный бульон, креветки, мидии, кальмары, черри, кокосовое молоко, тайские пряности, грибы, зелень.</span>
+                        </div>
+                        <span class="price">1 650 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/9495815/2a0000018a896184fd6e517c79684222e426/orig" alt="Том Ям Пан креветки" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Том Ям Пан креветки <span style="font-weight:300;font-size:0.9em">(1000 мл)</span></span>
+                            <span class="desc">На компанию 2–3 чел. Куриный бульон, креветки, черри, кокосовое молоко, тайские пряности, грибы, зелень.</span>
+                        </div>
+                        <span class="price">1 650 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5514775/2a000001822005013777a30bb68ba7826dc1/orig" alt="Том Кха креветки" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Том Кха креветки <span style="font-weight:300;font-size:0.9em">(500 мл)</span></span>
+                            <span class="desc">Куриный бульон, имбирь, креветки, кокосовое молоко, тайские пряности, грибы, зелень.</span>
+                        </div>
+                        <span class="price">850 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a893a5470d2c0ee2d4e60ba6607/orig" alt="Том Кха морепродукты" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Том Кха морепродукты <span style="font-weight:300;font-size:0.9em">(500 мл)</span></span>
+                            <span class="desc">Куриный бульон, имбирь, креветки, мидии, кальмары, кокосовое молоко, тайские пряности, грибы, зелень.</span>
+                        </div>
+                        <span class="price">850 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a893c802bbcf03c29202f28c4ca/orig" alt="Том Кха Пан креветки" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Том Кха Пан креветки <span style="font-weight:300;font-size:0.9em">(1000 мл)</span></span>
+                            <span class="desc">На компанию 2–3 чел. Куриный бульон, креветки, кокосовое молоко, тайские пряности, грибы, зелень.</span>
+                        </div>
+                        <span class="price">1 650 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a893bd4894e28e70d932cc8cacd/orig" alt="Том Кха курица" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Том Кха курица <span style="font-weight:300;font-size:0.9em">(500 мл)</span></span>
+                            <span class="desc">Куриный бульон, имбирь, филе курицы, кокосовое молоко, тайские пряности, грибы, зелень.</span>
+                        </div>
+                        <span class="price">650 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a8952f800607cee1c34a91f9545/orig" alt="Том Кха веган" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Том Кха веган <span style="font-weight:300;font-size:0.9em">(500 мл)</span></span>
+                            <span class="desc">Вода, тофу, кокосовое молоко, тайские пряности, грибы, зелень.</span>
+                        </div>
+                        <span class="price">650 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/9495815/2a0000018a893b196ab2acf3fa91e73edafb/orig" alt="Грин карри курица" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Грин карри курица <span style="font-weight:300;font-size:0.9em">(500 мл)</span></span>
+                            <span class="desc">Куриный бульон, филе курицы, кокосовое молоко, тайские пряности, тайские баклажаны, карри паста, зелень.</span>
+                        </div>
+                        <span class="price">650 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a893a5470d2c0ee2d4e60ba6607/orig" alt="Грин карри морепродукты" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Грин карри морепродукты <span style="font-weight:300;font-size:0.9em">(500 мл)</span></span>
+                            <span class="desc">Куриный бульон, креветки, мидии, кальмары, кокосовое молоко, тайские пряности, тайские баклажаны, карри паста, зелень.</span>
+                        </div>
+                        <span class="price">850 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a8952f800607cee1c34a91f9545/orig" alt="Грин карри веган" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Грин карри веган <span style="font-weight:300;font-size:0.9em">(500 мл)</span></span>
+                            <span class="desc">Вода, тофу, кокосовое молоко, тайские пряности, тайские баклажаны, карри паста, зелень.</span>
+                        </div>
+                        <span class="price">850 ₽</span>
+                    </div>
+
                 </div>
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5373629/2a000001821ffaa0ced7dd65edbb48a751aa/orig" alt="Пад Као" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Пад Као<span style="font-weight: 300; font-size: 0.9em;">(300 г)</span></span>
-                        <span class="desc">Филе курицы, устричный соус, рис, лук, чеснок, лук зелены, базилик.</span>
-                    </div>
-                    <span class="price">450 ₽</span>
-                </div>
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/9854027/2a0000018a8973eaf4518c0635f247c60870/orig" alt="Свинина в кисло-сладкий соусе" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Свинина в кисло-сладкий соусе<span style="font-weight: 300; font-size: 0.9em;">(350 г)</span></span>
-                        <span class="desc">Свинина, кисло-сладкий соус, перец сладкий, ананасы, огурцы, черри, лук, чеснок, лук зеленый, рис.</span>
-                    </div>
-                    <span class="price">499 ₽</span>
-                </div>
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/9495815/2a0000018a8964589856a754b35e6769425b/orig" alt="Карри с креветками" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Карри с креветками<span style="font-weight: 300; font-size: 0.9em;">(300 г)</span></span>
-                        <span class="desc">Креветки, паста карри, лук, чеснок, кокосовое молоко, рис, зелень.</span>
-                    </div>
-                    <span class="price">950 ₽</span>
-                </div>   
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5373629/2a000001821ffcfc41dd5b3cf8ef8f7c13f5/orig" alt="Рик Вок в ананасе с морепродуктами" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Рик Вок в ананасе с морепродуктами<span style="font-weight: 300; font-size: 0.9em;">(450 г)</span></span>
-                        <span class="desc">Половинка ананаса, морепродукты(креветки, кальмары, мидии) ри, морковь, лук, чеснок, сладкий перец, ананас, соус, лук зеленый, орехи.</span>
-                    </div>
-                    <span class="price">950 ₽</span>
-                </div>  
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5514775/2a000001821ffd7ee297ce863a185da21383/orig" alt="Рис Вок в ананасе с креветками" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Рис Вок в ананасе с креветками<span style="font-weight: 300; font-size: 0.9em;">(450 г)</span></span>
-                        <span class="desc">Половинка ананаса, креветки, устричный соус, рис, морковь, лук, чеснок, сладкий перец, ананас, соус, лук зеленый, орехи.</span>
-                    </div>
-                    <span class="price">950 ₽</span>
-                </div>
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a8955e734875226d8c39591e8f6/orig" alt="Сифуд Пан" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Сифуд Пан<span style="font-weight: 300; font-size: 0.9em;">(1000 г)</span></span>
-                        <span class="desc">Креветки, мидии, мидии в створках, кальмары, карри соус с кокосовым молоком, лук, чеснок, зелень.</span>
-                    </div>
-                    <span class="price">2500 ₽</span>
-                </div>
-                <div class="menu-item has-image">
-                    <img src="https://avatars.mds.yandex.net/get-sprav-products/5373629/2a000001821ffe8e08fa1a1821ebadb01647/orig" alt="Рис Вок в ананасе веган" class="item-image">
-                    <div class="item-info">
-                        <span class="name">Рис Вок в ананасе веган<span style="font-weight: 300; font-size: 0.9em;">(450 г)</span></span>
-                        <span class="desc">Половинка ананаса, грибы, соус, рис, морковь, лук, чеснок, сладкий перец, ананас, соус, лук зеленый, орехи.</span>
-                    </div>
-                    <span class="price">750 ₽</span>
-                </div>
-                
             </div>
         </div>
+
+        <!-- ═══ ВКЛАДКА: ГОРЯЧЕЕ ═══ -->
+        <div class="tab-panel" id="tab-hot" role="tabpanel">
+            <div class="menu-category">
+                <h3>🍛 Горячее</h3>
+                <div class="menu-grid">
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/9854027/2a0000018a896547c2658d083896fba75515/orig" alt="Пад Тай с креветками" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Пад Тай с креветками <span style="font-weight:300;font-size:0.9em">(300 г)</span></span>
+                            <span class="desc">Рисовая лапша, тофу, креветки, лук, чеснок, яйцо, проростки, арахис, лайм, тамариновый соус, лук зеленый.</span>
+                        </div>
+                        <span class="price">750 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5373629/2a000001821ffaa0ced7dd65edbb48a751aa/orig" alt="Пад Као" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Пад Као <span style="font-weight:300;font-size:0.9em">(300 г)</span></span>
+                            <span class="desc">Филе курицы, устричный соус, рис, лук, чеснок, лук зеленый, базилик.</span>
+                        </div>
+                        <span class="price">450 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/9854027/2a0000018a8973eaf4518c0635f247c60870/orig" alt="Свинина в кисло-сладком соусе" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Свинина в кисло-сладком соусе <span style="font-weight:300;font-size:0.9em">(350 г)</span></span>
+                            <span class="desc">Свинина, кисло-сладкий соус, перец сладкий, ананасы, огурцы, черри, лук, чеснок, лук зеленый, рис.</span>
+                        </div>
+                        <span class="price">499 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/9495815/2a0000018a8964589856a754b35e6769425b/orig" alt="Карри с креветками" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Карри с креветками <span style="font-weight:300;font-size:0.9em">(300 г)</span></span>
+                            <span class="desc">Креветки, паста карри, лук, чеснок, кокосовое молоко, рис, зелень.</span>
+                        </div>
+                        <span class="price">950 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5373629/2a000001821ffcfc41dd5b3cf8ef8f7c13f5/orig" alt="Рис Вок в ананасе с морепродуктами" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Рис Вок в ананасе с морепродуктами <span style="font-weight:300;font-size:0.9em">(450 г)</span></span>
+                            <span class="desc">Половинка ананаса, морепродукты (креветки, кальмары, мидии), рис, морковь, лук, чеснок, сладкий перец, ананас, соус, лук зеленый, орехи.</span>
+                        </div>
+                        <span class="price">950 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5514775/2a000001821ffd7ee297ce863a185da21383/orig" alt="Рис Вок в ананасе с креветками" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Рис Вок в ананасе с креветками <span style="font-weight:300;font-size:0.9em">(450 г)</span></span>
+                            <span class="desc">Половинка ананаса, креветки, устричный соус, рис, морковь, лук, чеснок, сладкий перец, ананас, соус, лук зеленый, орехи.</span>
+                        </div>
+                        <span class="price">950 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5236693/2a0000018a8955e734875226d8c39591e8f6/orig" alt="Сифуд Пан" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Сифуд Пан <span style="font-weight:300;font-size:0.9em">(1000 г)</span></span>
+                            <span class="desc">Креветки, мидии, мидии в створках, кальмары, карри соус с кокосовым молоком, лук, чеснок, зелень.</span>
+                        </div>
+                        <span class="price">2 500 ₽</span>
+                    </div>
+
+                    <div class="menu-item has-image">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5373629/2a000001821ffe8e08fa1a1821ebadb01647/orig" alt="Рис Вок в ананасе веган" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Рис Вок в ананасе веган <span style="font-weight:300;font-size:0.9em">(450 г)</span></span>
+                            <span class="desc">Половинка ананаса, грибы, соус, рис, морковь, лук, чеснок, сладкий перец, ананас, лук зеленый, орехи.</span>
+                        </div>
+                        <span class="price">750 ₽</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ ВКЛАДКА: ЗАКУСКИ (пустая) ═══ -->
+        <div class="tab-panel" id="tab-starters" role="tabpanel">
+            <div class="empty-tab">
+                <span class="empty-icon">🥗</span>
+                <p>Раздел «Закуски» скоро появится.<br>Следите за обновлениями.</p>
+            </div>
+        </div>
+
+        <!-- ═══ ВКЛАДКА: ДЕСЕРТЫ (пустая) ═══ -->
+        <div class="tab-panel" id="tab-desserts" role="tabpanel">
+            <div class="empty-tab">
+                <span class="empty-icon">🍮</span>
+                <p>Раздел «Десерты» скоро появится.<br>Следите за обновлениями.</p>
+            </div>
+        </div>
+
+        <!-- ═══ ВКЛАДКА: НАПИТКИ (пустая) ═══ -->
+        <div class="tab-panel" id="tab-drinks" role="tabpanel">
+            <div class="empty-tab">
+                <span class="empty-icon">🥤</span>
+                <p>Раздел «Напитки» скоро появится.<br>Следите за обновлениями.</p>
+            </div>
+        </div>
+
+    </div><!-- /.container -->
+
     <section class="about reveal">
         <h2>Концепция</h2>
         <p>
-            В название ресторана мы объединяем древние кулинарные традиции Таиланда с современной эстетикой. Наши ингредиенты еженедельно доставляются самолетами из Бангкока, чтобы каждый листик лайма и перец чили передавали истинный вкус Таиланда.
+            В названии ресторана мы объединяем древние кулинарные традиции Таиланда с современной эстетикой. Наши ингредиенты еженедельно доставляются самолётами из Бангкока, чтобы каждый листик лайма и перец чили передавали истинный вкус Таиланда.
         </p>
     </section>
 
     <section class="contacts reveal" id="contacts">
         <div class="contact-info">
             <h2>Наш адрес</h2>
-            
             <div class="address-group">
                 <div class="address-item">
                     <h4>Siam Downtown</h4>
                     <p>Набережная Риверсайд, 42<br>Район Бангкок</p>
                     <p><strong>Телефон:</strong> +7 (999) 000-01-01</p>
                 </div>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="socials">
-            <a href="#">Instagram</a>  <a href="#">Facebook</a>  <a href="#">Telegram</a>
+            <a href="#">Instagram</a>&nbsp;&nbsp;<a href="#">Facebook</a>&nbsp;&nbsp;<a href="#">Telegram</a>
         </div>
-        <p style="margin-top: 30px; font-size: 0.7rem; letter-spacing: 1px;">
-            <a href="#" style="color: #666; text-decoration: none;">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a><br><br>
+        <p style="margin-top:30px;font-size:0.7rem;letter-spacing:1px;">
+            <a href="#" style="color:#666;text-decoration:none;">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a><br><br>
             © 2026 НАЗВАНИЕ РЕСТОРАНА. ВСЕ ПРАВА ЗАЩИЩЕНЫ.
         </p>
     </footer>
-   
-   <script>
+
+    <script>
+    // ── Reveal on scroll ──────────────────────────────────────────────────────
     document.addEventListener("DOMContentLoaded", () => {
         const reveals = document.querySelectorAll(".reveal");
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("active");
-                    // Отключаем наблюдение после появления, чтобы анимация проигралась один раз
-                    observer.unobserve(entry.target); 
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.15 }); // Анимация начнется, когда видно 15% элемента
-
-        reveals.forEach(reveal => observer.observe(reveal));
+        }, { threshold: 0.15 });
+        reveals.forEach(r => observer.observe(r));
     });
+
+    // ── Tab switching ─────────────────────────────────────────────────────────
+    (function () {
+        const buttons  = document.querySelectorAll('.tab-btn');
+        const panels   = document.querySelectorAll('.tab-panel');
+        const wrapper  = document.getElementById('tabs-wrapper');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.dataset.tab;
+
+                // 1. Переключаем кнопки
+                buttons.forEach(b => {
+                    b.classList.toggle('active', b === btn);
+                    b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+                });
+
+                // 2. Переключаем панели
+                panels.forEach(p => {
+                    const isActive = p.id === 'tab-' + target;
+                    // Сбрасываем анимацию, чтобы она отыграла заново
+                    if (isActive) {
+                        p.style.animation = 'none';
+                        // eslint-disable-next-line no-unused-expressions
+                        p.offsetHeight; // reflow
+                        p.style.animation = '';
+                    }
+                    p.classList.toggle('active', isActive);
+                });
+
+                // 3. Плавный скролл к началу списка блюд
+                const topOfWrapper = wrapper.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({
+                    top: topOfWrapper - 20,   // небольшой запас сверху
+                    behavior: 'smooth'
+                });
+            });
+        });
+    })();
     </script>
 
 </body>
