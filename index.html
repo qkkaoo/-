@@ -207,9 +207,9 @@
             background: transparent;
             padding: 15px 10px;
             border-bottom: 1px solid #e0e0e0;
-            transition: background 0.3s ease, padding-left 0.3s ease, border-bottom-color 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease, padding-left 0.3s ease, border-bottom-color 0.3s ease; /* Добавили transform */
             cursor: pointer;
-            
+            will-change: transform; /* Подсказка браузеру для оптимизации */
         }
 
         .menu-item:hover {
@@ -217,6 +217,7 @@
             padding-left: 20px; /* Эффект красивого сдвига */
             padding-right: 10px; /* Компенсируем сдвиг, чтобы цена не уезжала */
             border-bottom-color: var(--thai-gold);
+            transform: scale(1.05); /* Эффект увеличения всего блока блюда */
         }
 
         .item-info .name {
@@ -357,6 +358,7 @@
         }
         .menu-item:hover {
             padding-left: 5px; /* Уменьшаем сдвиг анимации для мобилок */
+            transform: scale(1.02); /* Чуть меньше увеличение на мобильных */
         }
         .price { 
             margin-top: 10px; 
@@ -368,6 +370,12 @@
         .address-group { 
             flex-direction: column; 
             gap: 30px; 
+        }
+
+        /* Адаптивный размер изображений блюд */
+        .item-image {
+            width: 120px !important;
+            height: 120px !important;
         }
     }
         /* Базовый класс для скрытых элементов */
@@ -411,18 +419,16 @@
         }
 
         .item-image {
-            width: 70px;
-            height: 70px;
+            width: 180px; /* ИЗМЕНЕНО: Картинки стали больше (было 70px) */
+            height: 180px; /* ИЗМЕНЕНО: Картинки стали больше (было 70px) */
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--thai-gold);
             flex-shrink: 0;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease; /* transition оставлен для старых браузеров */
         }
 
-        .menu-item:hover .item-image {
-            transform: scale(1.1);
-        }
+        /* СТАРЫЙ ЭФФЕКТ УВЕЛИЧЕНИЯ ТОЛЬКО КАРТИНКИ УДАЛЕН */
 
         .menu-item.has-image .item-info {
             flex-grow: 1;
@@ -434,16 +440,7 @@
 
 
     /* Эффект при наведении на пункты меню */
-        .menu-item {
-            transition: background 0.3s ease, padding-left 0.3s ease;
-            cursor: pointer;
-        }
-
-        .menu-item:hover {
-            background-color: rgba(212, 175, 55, 0.05); /* Легкий золотистый фон */
-            padding-left: 10px;
-            border-bottom-color: var(--thai-gold);
-        }
+        /* Объединен со старым CSS (.menu-item), чтобы избежать дублирования */
 
     /* Мягкое пульсирование кнопки бронирования */
         .btn-book {
@@ -658,14 +655,7 @@
                     </div>
                     <span class="price">750 ₽</span>
                 </div>
-
-
-
                 
-                
-
-
-
             </div>
         </div>
     <section class="about reveal">
