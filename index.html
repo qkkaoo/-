@@ -56,7 +56,7 @@
             margin-left: 50px; background: transparent; color: var(--thai-gold);
             padding: 12px 30px; border: 1px solid var(--thai-gold); text-decoration: none;
             font-weight: 600; font-size: 0.8rem; letter-spacing: 2px;
-            transition: all 0.3s; animation: pulse 3s infinite;
+            transition: all 0.3s; animation: pulse 3s infinite; cursor: pointer;
         }
 
         .btn-book:hover { background-color: var(--thai-gold); color: var(--dark-wood); }
@@ -95,7 +95,6 @@
         .container { max-width: 1100px; margin: 100px auto; padding: 0 20px; }
 
         h2 { text-align: center; font-size: 3rem; margin-bottom: 50px; color: var(--thai-teal); }
-
         h2::after { content: "❦"; display: block; font-size: 1.5rem; color: var(--thai-gold); margin-top: 10px; }
 
         /* ─────────────────────────────────────
@@ -217,42 +216,6 @@
         .btn-add.burst { animation: addBurst 0.38s ease forwards; }
 
         /* ─────────────────────────────────────
-           FAB — ПЛАВАЮЩАЯ КНОПКА КОРЗИНЫ
-        ───────────────────────────────────── */
-        .cart-fab {
-            position: fixed; bottom: 32px; right: 32px; z-index: 1100;
-            width: 62px; height: 62px; border-radius: 50%;
-            background: var(--thai-teal); border: 2px solid var(--thai-gold);
-            color: white; font-size: 1.55rem;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 8px 28px rgba(0,78,78,0.35);
-            transition: transform 0.25s, box-shadow 0.25s;
-        }
-
-        .cart-fab:hover { transform: scale(1.08); box-shadow: 0 12px 36px rgba(0,78,78,0.45); }
-
-        .fab-count {
-            position: absolute; top: -6px; right: -6px;
-            background: var(--thai-gold); color: var(--dark-wood);
-            font-size: 0.7rem; font-weight: 700; font-family: 'Montserrat', sans-serif;
-            min-width: 22px; height: 22px; border-radius: 11px;
-            display: flex; align-items: center; justify-content: center; padding: 0 4px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-        }
-
-        .fab-count.hidden { display: none; }
-
-        @keyframes fabBounce {
-            0%   { transform: scale(1); }
-            30%  { transform: scale(1.25) rotate(-8deg); }
-            55%  { transform: scale(0.9) rotate(5deg); }
-            75%  { transform: scale(1.08); }
-            100% { transform: scale(1); }
-        }
-
-        .cart-fab.bounce { animation: fabBounce 0.52s ease; }
-
-        /* ─────────────────────────────────────
            КОРЗИНА — МОДАЛКА
         ───────────────────────────────────── */
         .cart-overlay {
@@ -298,8 +261,8 @@
         .cart-body::-webkit-scrollbar { width: 4px; }
         .cart-body::-webkit-scrollbar-thumb { background: var(--thai-gold); border-radius: 2px; }
 
-        /* Пустая */
-        .cart-empty { text-align: center; padding: 60px 0; color: #aaa; }
+        /* Пустая корзина */
+        .cart-empty { text-align: center; padding: 30px 0; color: #aaa; }
         .cart-empty span { font-size: 3rem; display: block; margin-bottom: 16px; }
         .cart-empty p { font-size: 0.95rem; font-style: italic; }
 
@@ -347,7 +310,7 @@
 
         /* Итого */
         .cart-total {
-            margin-top: 20px; padding: 16px 0 0;
+            margin-top: 20px; padding: 16px 0;
             border-top: 2px solid var(--thai-gold);
             display: flex; justify-content: space-between; align-items: center;
         }
@@ -356,7 +319,7 @@
         .cart-total strong { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--thai-teal); }
 
         /* Форма */
-        .order-form { margin-top: 28px; }
+        .order-form { margin-top: 20px; }
 
         .order-form h4 {
             font-family: 'Playfair Display', serif; color: var(--thai-teal);
@@ -473,7 +436,6 @@
             .contacts { padding: 60px 5%; }
             .address-group { flex-direction: column; gap: 30px; }
             .cart-modal { width: 100vw; }
-            .cart-fab { bottom: 20px; right: 20px; width: 54px; height: 54px; font-size: 1.35rem; }
             .cart-header { padding: 18px 20px; }
             .cart-body  { padding: 18px 20px; }
             .cart-footer { padding: 0 20px 24px; }
@@ -488,7 +450,8 @@
             <a href="#">Главная</a>
             <a href="#menu">Меню</a>
             <a href="#contacts">Контакты</a>
-            <a href="booking.html" target="_blank" class="btn-book">ЗАБРОНИРОВАТЬ СТОЛ</a>
+            <!-- Измененная кнопка для вызова модального окна -->
+            <a href="#" id="btnHeaderBook" class="btn-book">ЗАБРОНИРОВАТЬ СТОЛ</a>
         </nav>
     </header>
 
@@ -776,36 +739,34 @@
         </p>
     </footer>
 
-    <!-- ═══ FAB ═══ -->
-    <button class="cart-fab" id="cartFab" aria-label="Корзина">
-        🛒
-        <span class="fab-count hidden" id="fabCount">0</span>
-    </button>
-
-    <!-- ═══ МОДАЛКА КОРЗИНЫ ═══ -->
-    <div class="cart-overlay" id="cartOverlay" role="dialog" aria-modal="true" aria-label="Корзина заказа">
+    <!-- ═══ МОДАЛКА КОРЗИНЫ / БРОНИРОВАНИЯ ═══ -->
+    <div class="cart-overlay" id="cartOverlay" role="dialog" aria-modal="true" aria-label="Бронирование и корзина">
         <div class="cart-modal">
 
             <div class="cart-header">
-                <h3>🛒 Ваш заказ</h3>
+                <h3>🍽️ Ваш заказ</h3>
                 <button class="cart-close" id="cartClose" aria-label="Закрыть">&times;</button>
             </div>
 
             <div class="cart-body" id="cartBody">
-                <div class="cart-empty" id="cartEmpty">
-                    <span>🍽️</span>
-                    <p>Корзина пуста.<br>Добавьте любимые блюда!</p>
-                </div>
+                
+                <!-- Блок со списком блюд или заглушкой -->
+                <div id="cartItemsSection">
+                    <div class="cart-empty" id="cartEmpty">
+                        <span>🛒</span>
+                        <p>Корзина пуста.<br>Вы можете добавить блюда для предзаказа!</p>
+                    </div>
 
-                <ul class="cart-list" id="cartList"></ul>
+                    <ul class="cart-list" id="cartList"></ul>
 
-                <div id="cartCheckout" style="display:none;">
-                    <div class="cart-total">
+                    <div class="cart-total" id="cartTotalBlock" style="display:none;">
                         <span>Итого</span>
                         <strong id="cartTotalPrice">0 ₽</strong>
                     </div>
+                </div>
 
-                    <div class="order-form">
+                <!-- Блок формы (виден всегда, кроме успешной отправки) -->
+                <div class="order-form" id="bookingFormSection">
                     <h4>Бронь стола и предзаказ</h4>
 
                     <div class="form-group">
@@ -818,21 +779,22 @@
                         <input type="tel" id="orderPhone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required>
                     </div>
                     
-                    <!-- Добавляем поле для выбора даты и времени из второго файла -->
                     <div class="form-group">
                         <label for="orderDate">Дата и время брони</label>
                         <input type="datetime-local" id="orderDate" required>
                     </div>
                 </div>
+                
+                <!-- Блок успешной отправки -->
                 <div class="order-success" id="orderSuccess">
                     <span class="success-icon">🎉</span>
-                    <h4>Заказ принят!</h4>
-                    <p>Мы вам перезвоним в ближайшее время.<br>Спасибо, что выбрали Siam Elegance!</p>
+                    <h4>Заявка принята!</h4>
+                    <p>Мы вам перезвоним в ближайшее время для подтверждения брони.<br>Спасибо, что выбрали Siam Elegance!</p>
                 </div>
             </div>
 
             <div class="cart-footer">
-                <button class="btn-order" id="btnOrder" style="display:none;">ОФОРМИТЬ ЗАКАЗ</button>
+                <button class="btn-order" id="btnOrder">ЗАБРОНИРОВАТЬ СТОЛ</button>
             </div>
 
         </div>
@@ -852,27 +814,7 @@
     function saveCart()  { localStorage.setItem('siamCart', JSON.stringify(cart)); }
     function loadCart()  { try { cart = JSON.parse(localStorage.getItem('siamCart')) || []; } catch { cart = []; } }
     function fmtPrice(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
-    function totalItems(){ return cart.reduce((s, i) => s + i.qty, 0); }
     function totalPrice(){ return cart.reduce((s, i) => s + i.price * i.qty, 0); }
-
-    /* ══════════════════════════════════════════
-       FAB
-    ══════════════════════════════════════════ */
-    const fab      = document.getElementById('cartFab');
-    const fabCount = document.getElementById('fabCount');
-
-    function updateFab() {
-        const n = totalItems();
-        fabCount.textContent = n;
-        fabCount.classList.toggle('hidden', n === 0);
-    }
-
-    function bounceFab() {
-        fab.classList.remove('bounce');
-        void fab.offsetWidth;
-        fab.classList.add('bounce');
-        fab.addEventListener('animationend', () => fab.classList.remove('bounce'), { once: true });
-    }
 
     /* ══════════════════════════════════════════
        ДОБАВЛЕНИЕ
@@ -880,11 +822,9 @@
     function addToCart(name, price, btn) {
         const found = cart.find(i => i.name === name);
         if (found) { found.qty++; }
-        else        { cart.push({ name, price: Number(price), qty: 1 }); }
+        else       { cart.push({ name, price: Number(price), qty: 1 }); }
 
         saveCart();
-        updateFab();
-        bounceFab();
 
         btn.classList.remove('burst');
         void btn.offsetWidth;
@@ -895,43 +835,51 @@
     /* ══════════════════════════════════════════
        РЕНДЕР КОРЗИНЫ
     ══════════════════════════════════════════ */
-    const cartEmpty    = document.getElementById('cartEmpty');
-    const cartList     = document.getElementById('cartList');
-    const cartCheckout = document.getElementById('cartCheckout');
-    const cartTotalEl  = document.getElementById('cartTotalPrice');
-    const btnOrder     = document.getElementById('btnOrder');
-    const orderSuccess = document.getElementById('orderSuccess');
+    const cartItemsSection   = document.getElementById('cartItemsSection');
+    const cartEmpty          = document.getElementById('cartEmpty');
+    const cartList           = document.getElementById('cartList');
+    const cartTotalBlock     = document.getElementById('cartTotalBlock');
+    const cartTotalEl        = document.getElementById('cartTotalPrice');
+    const bookingFormSection = document.getElementById('bookingFormSection');
+    const btnOrder           = document.getElementById('btnOrder');
+    const orderSuccess       = document.getElementById('orderSuccess');
 
     function renderCart() {
         cartList.innerHTML = '';
+        
+        // Сброс видимости элементов после возможной успешной отправки
         orderSuccess.style.display = 'none';
-        btnOrder.textContent = 'ОФОРМИТЬ ЗАКАЗ';
-        btnOrder.disabled    = false;
+        cartItemsSection.style.display = 'block';
+        bookingFormSection.style.display = 'block';
+        btnOrder.style.display = 'block';
+        btnOrder.disabled = false;
 
         const empty = cart.length === 0;
-        cartEmpty.style.display    = empty ? 'block' : 'none';
-        cartCheckout.style.display = empty ? 'none'  : 'block';
-        btnOrder.style.display     = empty ? 'none'  : 'block';
+        
+        cartEmpty.style.display      = empty ? 'block' : 'none';
+        cartList.style.display       = empty ? 'none'  : 'block';
+        cartTotalBlock.style.display = empty ? 'none'  : 'flex';
+        
+        btnOrder.textContent = empty ? 'ЗАБРОНИРОВАТЬ СТОЛ' : 'ОФОРМИТЬ ЗАКАЗ';
 
-        if (empty) return;
-
-        cart.forEach((item, idx) => {
-            const li = document.createElement('li');
-            li.className = 'cart-row';
-            li.innerHTML = `
-                <div class="cart-row-name">${item.name}</div>
-                <div class="qty-controls">
-                    <button class="qty-btn" data-idx="${idx}" data-action="dec">−</button>
-                    <span class="qty-val">${item.qty}</span>
-                    <button class="qty-btn" data-idx="${idx}" data-action="inc">+</button>
-                </div>
-                <div class="cart-row-price">${fmtPrice(item.price * item.qty)}</div>
-                <button class="cart-row-del" data-idx="${idx}" aria-label="Удалить">✕</button>
-            `;
-            cartList.appendChild(li);
-        });
-
-        cartTotalEl.textContent = fmtPrice(totalPrice());
+        if (!empty) {
+            cart.forEach((item, idx) => {
+                const li = document.createElement('li');
+                li.className = 'cart-row';
+                li.innerHTML = `
+                    <div class="cart-row-name">${item.name}</div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" data-idx="${idx}" data-action="dec">−</button>
+                        <span class="qty-val">${item.qty}</span>
+                        <button class="qty-btn" data-idx="${idx}" data-action="inc">+</button>
+                    </div>
+                    <div class="cart-row-price">${fmtPrice(item.price * item.qty)}</div>
+                    <button class="cart-row-del" data-idx="${idx}" aria-label="Удалить">✕</button>
+                `;
+                cartList.appendChild(li);
+            });
+            cartTotalEl.textContent = fmtPrice(totalPrice());
+        }
     }
 
     /* ══════════════════════════════════════════
@@ -942,13 +890,18 @@
     function openCart()  { renderCart(); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
     function closeCart() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
 
-    fab.addEventListener('click', openCart);
+    // Открытие корзины по кнопке в Header
+    document.getElementById('btnHeaderBook').addEventListener('click', (e) => {
+        e.preventDefault();
+        openCart();
+    });
+
     document.getElementById('cartClose').addEventListener('click', closeCart);
     overlay.addEventListener('click', e => { if (e.target === overlay) closeCart(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
 
     /* ══════════════════════════════════════════
-       УПРАВЛЕНИЕ ПОЗИЦИЯМИ
+       УПРАВЛЕНИЕ ПОЗИЦИЯМИ В КОРЗИНЕ
     ══════════════════════════════════════════ */
     document.getElementById('cartList').addEventListener('click', e => {
         const btn = e.target.closest('[data-idx]');
@@ -962,29 +915,27 @@
         else                        { cart.splice(idx, 1); }   // del
 
         saveCart();
-        updateFab();
         renderCart();
     });
 
     /* ══════════════════════════════════════════
-       ОТПРАВКА В GOOGLE SHEETS
-    ══════════════════════════════════════════ */
-    /* ══════════════════════════════════════════
-       ОТПРАВКА В GOOGLE SHEETS
+       ОТПРАВКА ДАННЫХ В GOOGLE SHEETS
     ══════════════════════════════════════════ */
     btnOrder.addEventListener('click', async () => {
         const name  = document.getElementById('orderName').value.trim();
         const phone = document.getElementById('orderPhone').value.trim();
-        const date  = document.getElementById('orderDate').value; // Получаем дату
+        const date  = document.getElementById('orderDate').value;
 
         if (!name)  { document.getElementById('orderName').focus();  return; }
         if (!phone) { document.getElementById('orderPhone').focus(); return; }
-        if (!date)  { document.getElementById('orderDate').focus();  return; } // Проверка на заполненность
+        if (!date)  { document.getElementById('orderDate').focus();  return; }
 
-        // Собираем корзину (используем \n для переноса строк внутри ячейки таблицы)
-        const lines = cart.map(i => `${i.name} × ${i.qty} = ${fmtPrice(i.price * i.qty)}`);
-        lines.push(`ИТОГО: ${fmtPrice(totalPrice())}`);
-        const orderStr = lines.join('\n'); 
+        let orderStr = "Только бронирование стола";
+        if (cart.length > 0) {
+            const lines = cart.map(i => `${i.name} × ${i.qty} = ${fmtPrice(i.price * i.qty)}`);
+            lines.push(`ИТОГО: ${fmtPrice(totalPrice())}`);
+            orderStr = lines.join('\n'); 
+        }
 
         btnOrder.disabled    = true;
         btnOrder.textContent = 'Отправляем…';
@@ -993,21 +944,19 @@
             const fd = new FormData();
             fd.append('name',  name);
             fd.append('phone', phone);
-            fd.append('date',  date);      // Отправляем дату брони
-            fd.append('order', orderStr);  // Отправляем список блюд в отдельном параметре
+            fd.append('date',  date);      
+            fd.append('order', orderStr);  
 
             await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: fd, mode: 'no-cors' });
 
             // Успех
             cart = [];
             saveCart();
-            updateFab();
 
-            cartList.innerHTML         = '';
-            cartCheckout.style.display = 'none';
-            cartEmpty.style.display    = 'none';
-            btnOrder.style.display     = 'none';
-            orderSuccess.style.display = 'block';
+            cartItemsSection.style.display   = 'none';
+            bookingFormSection.style.display = 'none';
+            btnOrder.style.display           = 'none';
+            orderSuccess.style.display       = 'block';
 
         } catch (err) {
             console.error(err);
@@ -1031,7 +980,6 @@
     ══════════════════════════════════════════ */
     document.addEventListener('DOMContentLoaded', () => {
         loadCart();
-        updateFab();
 
         const obs = new IntersectionObserver(entries => {
             entries.forEach(e => {
