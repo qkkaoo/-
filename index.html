@@ -969,16 +969,22 @@
     /* ══════════════════════════════════════════
        ОТПРАВКА В GOOGLE SHEETS
     ══════════════════════════════════════════ */
+    /* ══════════════════════════════════════════
+       ОТПРАВКА В GOOGLE SHEETS
+    ══════════════════════════════════════════ */
     btnOrder.addEventListener('click', async () => {
         const name  = document.getElementById('orderName').value.trim();
         const phone = document.getElementById('orderPhone').value.trim();
+        const date  = document.getElementById('orderDate').value; // Получаем дату
 
         if (!name)  { document.getElementById('orderName').focus();  return; }
         if (!phone) { document.getElementById('orderPhone').focus(); return; }
+        if (!date)  { document.getElementById('orderDate').focus();  return; } // Проверка на заполненность
 
+        // Собираем корзину (используем \n для переноса строк внутри ячейки таблицы)
         const lines = cart.map(i => `${i.name} × ${i.qty} = ${fmtPrice(i.price * i.qty)}`);
         lines.push(`ИТОГО: ${fmtPrice(totalPrice())}`);
-        const orderStr = lines.join(' | ');
+        const orderStr = lines.join('\n'); 
 
         btnOrder.disabled    = true;
         btnOrder.textContent = 'Отправляем…';
@@ -987,7 +993,8 @@
             const fd = new FormData();
             fd.append('name',  name);
             fd.append('phone', phone);
-            fd.append('order', orderStr);
+            fd.append('date',  date);      // Отправляем дату брони
+            fd.append('order', orderStr);  // Отправляем список блюд в отдельном параметре
 
             await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: fd, mode: 'no-cors' });
 
