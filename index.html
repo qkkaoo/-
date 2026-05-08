@@ -806,20 +806,24 @@
                     </div>
 
                     <div class="order-form">
-                        <h4>Оформление заказа</h4>
+                    <h4>Бронь стола и предзаказ</h4>
 
-                        <div class="form-group">
-                            <label for="orderName">Ваше имя</label>
-                            <input type="text" id="orderName" placeholder="Иван Иванов" autocomplete="name">
-                        </div>
+                    <div class="form-group">
+                        <label for="orderName">Ваше имя</label>
+                        <input type="text" id="orderName" placeholder="Иван Иванов" autocomplete="name" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="orderPhone">Телефон</label>
-                            <input type="tel" id="orderPhone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
-                        </div>
+                    <div class="form-group">
+                        <label for="orderPhone">Телефон</label>
+                        <input type="tel" id="orderPhone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required>
+                    </div>
+                    
+                    <!-- Добавляем поле для выбора даты и времени из второго файла -->
+                    <div class="form-group">
+                        <label for="orderDate">Дата и время брони</label>
+                        <input type="datetime-local" id="orderDate" required>
                     </div>
                 </div>
-
                 <div class="order-success" id="orderSuccess">
                     <span class="success-icon">🎉</span>
                     <h4>Заказ принят!</h4>
