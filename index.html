@@ -25,15 +25,22 @@
 
         h1, h2, h3, .logo { font-family: 'Playfair Display', serif; }
 
-        /* ───── Header ───── */
+        /* ───── Header — Glassmorphism ───── */
         header {
-            background-color: rgba(2, 100, 84, 0.95);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 58, 58, 0.55);
+            backdrop-filter: blur(22px) saturate(200%);
+            -webkit-backdrop-filter: blur(22px) saturate(200%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
             color: white; padding: 15px 20px;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
             gap: 10px; position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+        header.scrolled {
+            background: rgba(0, 40, 40, 0.78);
+            box-shadow: 0 6px 40px rgba(0, 0, 0, 0.28);
         }
 
         .logo {
@@ -162,15 +169,31 @@
             display: flex; justify-content: space-between; align-items: flex-end;
             background: transparent; padding: 15px 10px;
             border-bottom: 1px solid #e0e0e0; position: relative;
-            transition: transform 0.3s ease, background 0.3s ease,
-                        padding-left 0.3s ease, border-bottom-color 0.3s ease;
+            transition: transform 0.35s ease, background 0.35s ease,
+                        padding-left 0.3s ease, border-bottom-color 0.3s ease,
+                        box-shadow 0.35s ease;
             cursor: default; will-change: transform;
         }
 
         .menu-item:hover {
-            background-color: rgba(212,175,55,0.05);
+            background-color: rgba(212,175,55,0.06);
             border-bottom-color: var(--thai-gold);
-            transform: scale(1.05);
+            transform: scale(1.04);
+            box-shadow: 0 8px 28px rgba(0, 78, 78, 0.1), 0 2px 8px rgba(212, 175, 55, 0.12);
+        }
+
+        /* ─── Карточки с изображением — отдельная логика ─── */
+        .menu-item.has-image {
+            border-radius: 14px;
+            border-bottom: none !important;
+            padding: 16px !important;
+            overflow: hidden;
+        }
+
+        .menu-item.has-image:hover {
+            transform: translateY(-5px) scale(1.02) !important;
+            box-shadow: 0 16px 48px rgba(0, 78, 78, 0.16), 0 4px 16px rgba(212, 175, 55, 0.18) !important;
+            background: rgba(212, 175, 55, 0.06) !important;
         }
 
         .item-info .name { font-size: 1.1rem; font-weight: 600; display: block; }
@@ -186,7 +209,14 @@
         .item-image {
             width: 180px; height: 180px; border-radius: 50%;
             object-fit: cover; border: 2px solid var(--thai-gold);
-            flex-shrink: 0; transition: transform 0.3s ease;
+            flex-shrink: 0;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        box-shadow 0.4s ease;
+        }
+
+        .menu-item.has-image:hover .item-image {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 10px 30px rgba(0, 78, 78, 0.28);
         }
 
         .menu-item.has-image .item-info { flex-grow: 1; }
@@ -226,9 +256,13 @@
         .cart-overlay.open { display: flex; align-items: stretch; justify-content: flex-end; }
 
         .cart-modal {
-            background: var(--light-sand); width: 480px; max-width: 100vw;
+            background: rgba(253, 251, 247, 0.82);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-left: 1px solid rgba(212, 175, 55, 0.4);
+            width: 480px; max-width: 100vw;
             height: 100vh; display: flex; flex-direction: column;
-            box-shadow: -8px 0 40px rgba(0,0,0,0.2); overflow: hidden;
+            box-shadow: -12px 0 60px rgba(0, 78, 78, 0.2); overflow: hidden;
             animation: slideIn 0.38s cubic-bezier(0.22,1,0.36,1) forwards;
         }
 
@@ -410,9 +444,73 @@
 
         .socials a { color: var(--thai-gold); margin: 0 15px; text-decoration: none; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* ───── Reveal ───── */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        /* ─── Reveal (базовые стили — анимация управляется JS) ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+        }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ═════════════════════════════════════════
+           CUSTOM SCROLLBAR (бренд-цвета)
+        ═════════════════════════════════════════ */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1410; }
+        ::-webkit-scrollbar-thumb {
+            background: var(--thai-gold);
+            border-radius: 4px;
+            border: 2px solid #1a1410;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #e8c84a; }
+        * { scrollbar-width: thin; scrollbar-color: var(--thai-gold) #1a1410; }
+
+        /* ═════════════════════════════════════════
+           FLOATING CART BUTTON
+        ═════════════════════════════════════════ */
+        #floatingCart {
+            position: fixed; bottom: 32px; right: 32px;
+            width: 60px; height: 60px; border-radius: 50%;
+            background: var(--thai-teal);
+            border: 2px solid var(--thai-gold);
+            color: var(--thai-gold); font-size: 1.5rem;
+            cursor: pointer; z-index: 1500;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 24px rgba(0, 78, 78, 0.45);
+            opacity: 0; pointer-events: none;
+            transform: scale(0.6) translateY(16px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        opacity 0.3s ease, background 0.25s, color 0.25s;
+        }
+
+        #floatingCart.visible {
+            opacity: 1; pointer-events: auto;
+            transform: scale(1) translateY(0);
+        }
+
+        #floatingCart:hover {
+            background: var(--thai-gold);
+            color: var(--dark-wood);
+            transform: scale(1.1) translateY(0) !important;
+            box-shadow: 0 10px 32px rgba(212, 175, 55, 0.4);
+        }
+
+        #floatingCart .float-badge {
+            position: absolute; top: -5px; right: -5px;
+            background: var(--thai-accent); color: white;
+            width: 22px; height: 22px; border-radius: 50%;
+            font-size: 0.68rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: scale(0);
+            transition: opacity 0.25s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 2px solid white;
+        }
+
+        #floatingCart .float-badge.show { opacity: 1; transform: scale(1); }
+
+        @media (max-width: 768px) {
+            #floatingCart { bottom: 20px; right: 20px; width: 52px; height: 52px; font-size: 1.3rem; }
+        }
 
         /* ───── Keyframes ───── */
         @keyframes fadeInDown {
@@ -703,13 +801,57 @@
                         <button class="btn-add" aria-label="Добавить в корзину">+</button>
                     </div>
 
+                    <div class="menu-item has-image" data-name="Kao СоЙ" data-price="750">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/9854027/2a0000018a89551ab8f526969abbacd5693a/orig" alt="Kao СоЙ" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Kao СоЙ <span style="font-weight:300;font-size:.9em">(1 шт)</span></span>
+                            <span class="desc"> Жареная лапша, курица, кокосовое молоко, базилик, паста Као Сой, яичная лапша.</span>
+                        </div>
+                        <span class="price">750 ₽</span>
+                        <button class="btn-add" aria-label="Добавить в корзину">+</button>
+                    </div>
+
+                    
+
+                    
                 </div>
             </div>
         </div>
 
         <!-- Пустые вкладки -->
         <div class="tab-panel" id="tab-starters" role="tabpanel">
-            <div class="empty-tab"><span class="empty-icon">🥗</span><p>Раздел «Закуски» скоро появится.<br>Следите за обновлениями.</p></div>
+             <h3>🥗 Салат</h3>
+                <div class="menu-grid">
+                    <div class="menu-item has-image" data-name="Пад Тай с креветками" data-price="750">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5514775/2a00000182201585bd8592ccdd93cb434f1b/orig" alt="Ям Вунсен" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Ям Вунсен <span style="font-weight:300;font-size:.9em">(240 г)</span></span>
+                            <span class="desc">Креветки. кальмары. мидии. черри. фунчоза. лаим. рыбный covc. соевый covc. чеснок. лук. зелень</span>
+                        </div>
+                        <span class="price">750 ₽</span>
+                        <button class="btn-add" aria-label="Добавить в корзину">+</button>
+                    </div>
+
+                    <div class="menu-item has-image" data-name="Пад Тай с креветками" data-price="750">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/5514775/2a00000182201585bd8592ccdd93cb434f1b/orig" alt="Лааб Му " class="item-image">
+                        <div class="item-info">
+                            <span class="name">Лааб Му<span style="font-weight:300;font-size:.9em">(166 г)</span></span>
+                            <span class="desc">Свинина. лук. чеснок.клеикии рис, чили, лайм, рыбный coус, зелень.</span>
+                        </div>
+                        <span class="price">499 ₽</span>
+                        <button class="btn-add" aria-label="Добавить в корзину">+</button>
+                    </div>
+
+                    <div class="menu-item has-image" data-name="Пад Тай с креветками" data-price="750">
+                        <img src="https://avatars.mds.yandex.net/get-sprav-products/9854027/2a000001889606f59f08d05b655acc7854b0/orig" alt="Ям Вунсен" class="item-image">
+                        <div class="item-info">
+                            <span class="name">Ям Вунсен <span style="font-weight:300;font-size:.9em">(240 г)</span></span>
+                            <span class="desc">Креветки. кальмары. мидии. черри. фунчоза. лаим. рыбный covc. соевый covc. чеснок. лук. зелень</span>
+                        </div>
+                        <span class="price">750 ₽</span>
+                        <button class="btn-add" aria-label="Добавить в корзину">+</button>
+                    </div>
+
         </div>
 
         <div class="tab-panel" id="tab-desserts" role="tabpanel">
@@ -844,6 +986,12 @@
         </div>
     </div>
 
+    <!-- ═══ FLOATING CART BUTTON ═══ -->
+    <button id="floatingCart" aria-label="Открыть корзину">
+        🛒
+        <span class="float-badge" id="floatBadge"></span>
+    </button>
+
     <script>
     /* ══════════════════════════════════════════
        КОНФИГУРАЦИЯ
@@ -870,7 +1018,14 @@
 
         saveCart();
 
-        btn.classList.remove('burst');
+        // Обновляем плавающую кнопку корзины
+        const fb    = document.getElementById('floatBadge');
+        const total = cart.reduce((s, i) => s + i.qty, 0);
+        if (fb) {
+            fb.textContent = total > 9 ? '9+' : total;
+            fb.classList.toggle('show', total > 0);
+        }
+
         void btn.offsetWidth;
         btn.classList.add('burst');
         btn.addEventListener('animationend', () => btn.classList.remove('burst'), { once: true });
@@ -1020,18 +1175,73 @@
     });
 
     /* ══════════════════════════════════════════
-       REVEAL + ИНИЦИАЛИЗАЦИЯ
+       REVEAL — STAGGERED (каскадная анимация)
     ══════════════════════════════════════════ */
     document.addEventListener('DOMContentLoaded', () => {
         loadCart();
 
-        const obs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); }
-            });
-        }, { threshold: 0.15 });
+        /* Группируем .reveal элементы по родителю,
+           чтобы задавать delay внутри каждой группы отдельно */
+        const revealEls = document.querySelectorAll('.reveal');
 
-        document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+        const obs = new IntersectionObserver((entries) => {
+            // Сортируем видимые элементы сверху вниз
+            const visible = entries.filter(e => e.isIntersecting);
+            visible
+                .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+                .forEach((entry, i) => {
+                    const el = entry.target;
+                    // Базовая задержка + stagger 120ms на каждый следующий
+                    el.style.transitionDelay = `${i * 120}ms`;
+                    el.classList.add('active');
+                    // Сбрасываем delay после завершения анимации
+                    el.addEventListener('transitionend', () => {
+                        el.style.transitionDelay = '0ms';
+                    }, { once: true });
+                    obs.unobserve(el);
+                });
+        }, { threshold: 0.12 });
+
+        revealEls.forEach(r => obs.observe(r));
+
+        /* ══ HEADER — добавляем класс .scrolled при скролле ══ */
+        const header = document.querySelector('header');
+        const onScroll = () => {
+            header.classList.toggle('scrolled', window.scrollY > 60);
+            updateFloatingCart();
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        /* ══ HERO PARALLAX ══ */
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                // Двигаем фон с коэффициентом 0.4 (фон медленнее контента)
+                hero.style.backgroundPositionY = `calc(50% + ${scrolled * 0.4}px)`;
+            }, { passive: true });
+        }
+
+        /* ══ FLOATING CART BUTTON ══ */
+        const floatingCart  = document.getElementById('floatingCart');
+        const floatBadge    = document.getElementById('floatBadge');
+
+        function updateFloatingCart() {
+            // Показываем кнопку после 300px скролла
+            floatingCart.classList.toggle('visible', window.scrollY > 300);
+
+            // Обновляем счётчик
+            const total = cart.reduce((s, i) => s + i.qty, 0);
+            floatBadge.textContent = total > 9 ? '9+' : total;
+            floatBadge.classList.toggle('show', total > 0);
+        }
+
+        floatingCart.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCart();
+        });
+
+        updateFloatingCart();
     });
 
     /* ══════════════════════════════════════════
