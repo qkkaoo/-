@@ -251,8 +251,8 @@ nav a:hover::after { transform: scaleX(1); }
   font-size: 0.68rem;
   letter-spacing: 6px;
   text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 400;
+  color: #FFD700;
+  font-weight: 600;
   margin-bottom: 20px;
   opacity: 0;
   animation: fadeUp 1.2s var(--ease-out) 0.3s forwards;
@@ -261,25 +261,26 @@ nav a:hover::after { transform: scaleX(1); }
 .hero h1 {
   font-family: var(--serif);
   font-size: clamp(3.5rem, 8vw, 7rem);
-  font-weight: 300;
-  color: #fff;
+  font-weight: 700;
+  color: #FFFFFF;
   line-height: 1.05;
   margin-bottom: 28px;
   opacity: 0;
   animation: fadeUp 1.4s var(--ease-out) 0.6s forwards;
 }
 .hero h1 em {
-  font-style: italic;
-  color: var(--gold);
-  font-weight: 300;
+  font-style: normal;
+  color: #FFD700;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .hero-sub {
   font-size: 1.05rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.75);
-  letter-spacing: 0.5px;
-  line-height: 1.8;
+  font-weight: 500;
+  color: #F0F8FF;
+  letter-spacing: 0.4px;
+  line-height: 1.85;
   margin-bottom: 50px;
   opacity: 0;
   animation: fadeUp 1.4s var(--ease-out) 0.9s forwards;
@@ -471,9 +472,10 @@ nav a:hover::after { transform: scaleX(1); }
 
 .about-text p {
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 2;
-  color: rgba(232,218,200,0.78);
+  color: rgba(232,218,200,0.92);
+  letter-spacing: 0.25px;
   margin-bottom: 22px;
 }
 
@@ -785,11 +787,12 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .menu-card-desc {
   font-size: 0.82rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--text-mid);
-  line-height: 1.7;
+  line-height: 1.75;
   margin-bottom: 18px;
   font-style: italic;
+  letter-spacing: 0.2px;
 }
 .menu-card-footer {
   display: flex;
@@ -861,7 +864,7 @@ nav a:hover::after { transform: scaleX(1); }
   font-weight: 400;
   color: var(--teal);
 }
-.menu-list-item .item-desc { font-size: 0.79rem; color: var(--text-mid); font-style: italic; margin-top: 2px; font-weight: 300; }
+.menu-list-item .item-desc { font-size: 0.79rem; color: var(--text-mid); font-style: italic; margin-top: 2px; font-weight: 400; letter-spacing: 0.2px; }
 .menu-list-item .item-info { flex: 1; }
 .menu-list-item .item-footer { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
 .menu-list-item .item-price { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: var(--teal); white-space: nowrap; }
@@ -944,15 +947,50 @@ nav a:hover::after { transform: scaleX(1); }
   background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(212,175,55,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
-.reserve-band .section-title { color: #f5e8cc; margin-bottom: 14px; }
-.reserve-band .section-sub { color: var(--gold); }
+.reserve-band .section-title { color: #ffffff; margin-bottom: 14px; }
+.reserve-band .section-sub { color: var(--gold); font-weight: 600; letter-spacing: 4px; }
 .reserve-band p {
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.9;
-  color: rgba(232,218,200,0.7);
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.25px;
   max-width: 560px;
   margin: 0 auto 44px;
+}
+.reserve-contact {
+  margin-top: 42px;
+}
+.reserve-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 22px;
+  justify-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.reserve-contact-grid div {
+  text-align: left;
+}
+.contact-label {
+  font-size: 0.68rem;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 10px;
+}
+.contact-text {
+  font-size: 0.98rem;
+  color: #ffffff;
+  line-height: 1.8;
+}
+.contact-text a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.contact-text a:hover {
+  color: var(--gold);
 }
 .reserve-form {
   display: flex;
@@ -965,20 +1003,20 @@ nav a:hover::after { transform: scaleX(1); }
 .reserve-form input {
   flex: 1;
   min-width: 180px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(212,175,55,0.25);
-  color: #e8dac8;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(212,175,55,0.45);
+  color: #ffffff;
   font-family: var(--sans);
   font-size: 0.85rem;
-  font-weight: 300;
-  letter-spacing: 0.5px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
   padding: 15px 20px;
   outline: none;
   transition: border-color 0.3s, background 0.3s;
   border-radius: 0;
   -webkit-appearance: none;
 }
-.reserve-form input::placeholder { color: rgba(232,218,200,0.4); }
+.reserve-form input::placeholder { color: rgba(255,255,255,0.55); }
 .reserve-form input:focus {
   border-color: rgba(212,175,55,0.6);
   background: rgba(255,255,255,0.1);
@@ -1008,7 +1046,7 @@ footer {
   margin-bottom: 40px;
 }
 .footer-brand .logo { display: block; margin-bottom: 20px; font-size: 1.5rem; }
-.footer-brand p { font-size: 0.82rem; line-height: 1.9; color: rgba(107,87,64,0.8); font-weight: 300; max-width: 260px; }
+.footer-brand p { font-size: 0.82rem; line-height: 1.9; color: rgba(107,87,64,0.95); font-weight: 400; letter-spacing: 0.2px; max-width: 260px; }
 
 .footer-col-title {
   font-family: var(--serif);
@@ -1023,9 +1061,9 @@ footer {
 .footer-col a, .footer-col p {
   display: block;
   font-size: 0.82rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
-  color: rgba(107,87,64,0.75);
+  color: rgba(107,87,64,0.9);
   text-decoration: none;
   margin-bottom: 14px;
   transition: color 0.3s;
@@ -1677,16 +1715,16 @@ footer {
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Аутентичная тайская кухня · Воронеж</div>
-    <h1>Вкус настоящего<br><em>Таиланда</em></h1>
-    <p class="hero-sub">Мы готовим так, как готовят в Таиланде — из свежих трав, настоящих специй и уважения к традиции.<br>Каждое блюдо — это маленькое путешествие прямо за вашим столом.</p>
+    <div class="hero-eyebrow">Добро пожаловать в ULE THAI · Воронеж</div>
+    <h1>Ощутите вкус<br><em>Таиланда</em></h1>
+    <p class="hero-sub">Аутентичные рецепты, свежие ингредиенты и атмосфера тропического рая ждут вас.<br>Каждое блюдо — это история, каждая трапеза — приключение.</p>
     <div class="hero-actions">
-      <a href="#menu" class="btn-primary">Смотреть меню</a>
+      <a href="#menu" class="btn-primary">Посмотреть меню</a>
       <a href="#contact" class="btn-ghost">Забронировать стол</a>
     </div>
   </div>
   <div class="hero-scroll">
-    <span>Прокрутка</span>
+    <span>Прокрутите вниз</span>
     <div class="scroll-line"></div>
   </div>
 </section>
@@ -1860,7 +1898,6 @@ footer {
 
   <!-- MAINS -->
   <div class="tab-panel" id="tab-mains" role="tabpanel">
-    <div class="menu-cat-title">Фирменные блюда шефа</div>
     <div class="menu-grid">
       <article class="menu-card reveal" data-name="Пад Тай с креветками" data-price="750">
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1562565652-a0d8f0c59eb4?w=600&auto=format&fit=crop" alt="Пад Тай с креветками" loading="lazy">
@@ -1970,41 +2007,7 @@ footer {
         </div>
       </article>
     </div>
-
-    <div class="menu-cat-title" style="margin-top:20px;">Из вок</div>
-    <div class="menu-list">
-      <div class="menu-list-item reveal" data-name="Khao Pad Sapparot" data-price="16">
-        <div class="item-info">
-          <div class="item-name">Khao Pad Sapparot</div>
-          <div class="item-desc">Pineapple fried rice, shrimp, cashews, golden raisins, egg, curry powder</div>
-        </div>
-        <div class="item-footer">
-          <span class="item-price">£16</span>
-          <button class="btn-add" aria-label="Add to order">+</button>
-        </div>
-      </div>
-      <div class="menu-list-item reveal" data-name="Pad Kra Pao" data-price="17">
-        <div class="item-info">
-          <div class="item-name">Pad Kra Pao Moo Krob</div>
-          <div class="item-desc">Crispy pork belly, holy basil, green beans, oyster sauce, crispy egg on jasmine rice</div>
-        </div>
-        <div class="item-footer">
-          <span class="item-price">£17</span>
-          <button class="btn-add" aria-label="Add to order">+</button>
-        </div>
-      </div>
-      <div class="menu-list-item reveal" data-name="Pad See Ew" data-price="16">
-        <div class="item-info">
-          <div class="item-name">Pad See Ew Wagyu</div>
-          <div class="item-desc">Wide rice noodles, wagyu beef strips, Chinese broccoli, sweet soy, wok smoke</div>
-        </div>
-        <div class="item-footer">
-          <span class="item-price">£16</span>
-          <button class="btn-add" aria-label="Add to order">+</button>
-        </div>
-      </div>
-    </div>
-  </div>
+      
 
   <!-- STARTERS -->
   <div class="tab-panel" id="tab-starters" role="tabpanel">
@@ -2129,74 +2132,8 @@ footer {
     </div>
 </section>
 
-<!-- ═══ RESERVE BAND ═══ -->
-<section class="reserve-band" id="contact">
-  <div class="section-sub reveal">Сделать бронирование</div>
-  <h2 class="section-title reveal">Забронируйте <em>Стол</em></h2>
-  <p class="reveal">Присоединяйтесь к нам на вечер вкуса, атмосферы и истории.<br>Мы с нетерпением ждем вас.</p>
-  <div class="reserve-form reveal">
-    <input type="text"   id="rsv-name"    placeholder="Ваше имя" autocomplete="name">
-    <input type="tel"    id="rsv-phone"   placeholder="Номер телефона" autocomplete="tel">
-    <input type="date"   id="rsv-date"    placeholder="Дата">
-    <input type="number" id="rsv-guests"  placeholder="Гости" min="1" max="20" style="max-width:120px;">
-    <button class="btn-primary" id="btnReserve">Забронировать</button>
-  </div>
-</section>
 
-<!-- ═══ CONTACTS ═══ -->
-<section class="contacts-section" id="contacts">
-  <div class="contacts-inner">
-    <div class="contacts-header reveal">
-      <div class="section-sub">Мы ждем вас</div>
-      <h2 class="section-title">Как нас <em>найти</em></h2>
-      <div class="ornament" style="margin-bottom:0;">
-        <div class="ornament-line"></div>
-        <div class="ornament-symbol">✦</div>
-        <div class="ornament-line right"></div>
-      </div>
-    </div>
 
-    <div class="contacts-grid">
-      <div class="contact-card reveal">
-        <div class="contact-icon">📍</div>
-        <div class="contact-label">Адрес</div>
-        <div class="contact-value">ул. Арбат, 24, Москва<br>м. Арбатская / Смоленская</div>
-      </div>
-      <div class="contact-card reveal">
-        <div class="contact-icon">📞</div>
-        <div class="contact-label">Телефон</div>
-        <div class="contact-value"><a href="tel:+74991234567">+7 (499) 123-45-67</a></div>
-        <div class="contact-note">Бронирование и вопросы</div>
-      </div>
-      <div class="contact-card reveal">
-        <div class="contact-icon">🕐</div>
-        <div class="contact-label">Часы работы</div>
-        <div class="contact-value">Пн – Пт: 12:00 – 23:00<br>Сб – Вс: 11:00 – 00:00</div>
-      </div>
-      <div class="contact-card reveal">
-        <div class="contact-icon">✉️</div>
-        <div class="contact-label">E-mail</div>
-        <div class="contact-value"><a href="mailto:hello@ulethai.ru">hello@ulethai.ru</a></div>
-        <div class="contact-note">Мероприятия и сотрудничество</div>
-      </div>
-    </div>
-
-    <div class="contacts-socials reveal">
-      <a href="#" class="contact-social-link" aria-label="Instagram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        Instagram
-      </a>
-      <a href="#" class="contact-social-link" aria-label="Telegram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.2 5.1 2.8 12.3c-1.2.5-1.2 1.3-.2 1.6l4.6 1.5 10.7-6.7c.5-.3 1 .1.6.5l-8.7 7.8-.3 4.7c.5 0 .7-.2 1-.5l2.4-2.3 5 3.7c.9.5 1.6.2 1.9-.8L22.8 6.3c.4-1.3-.5-1.9-1.6-1.2z"/></svg>
-        Telegram
-      </a>
-      <a href="#" class="contact-social-link" aria-label="VK">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.73 13.5h-1.8c-.68 0-.89-.54-2.12-1.77-.97-.97-1.4-.97-1.65-.97-.34 0-.43.09-.43.56v1.62c0 .4-.13.63-1.17.63-1.73 0-3.65-1.05-5-3C5.63 10.24 5 8.24 5 7.87c0-.25.09-.48.56-.48h1.8c.42 0 .58.19.74.63.82 2.37 2.19 4.45 2.75 4.45.21 0 .31-.1.31-.63V9.52c-.07-1.12-.65-1.21-.65-1.61 0-.2.16-.4.42-.4h2.83c.36 0 .48.19.48.6v3.23c0 .36.16.48.26.48.21 0 .38-.12.76-.5 1.17-1.31 2-3.34 2-3.34.11-.23.31-.44.74-.44h1.8c.54 0 .66.28.54.66-.23 1.05-2.46 4.2-2.46 4.2-.19.31-.26.44 0 .79.19.27.81.83 1.22 1.32.76.86 1.33 1.59 1.49 2.09.17.5-.1.76-.58.76z"/></svg>
-        ВКонтакте
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- ═══ RESERVE MODAL ═══ -->
 <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Reservation and cart">
@@ -2252,6 +2189,39 @@ footer {
   🛒
   <span class="float-badge" id="floatBadge"></span>
 </button>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo">ULE THAI<span>Аутентичная тайская кухня</span></a>
+      <p>Мы приносим вкус настоящего Таиланда прямо к вашему столу. Свежие ингредиенты, аутентичные рецепты и атмосфера тропического рая.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Меню</div>
+      <a href="#menu">Супы</a>
+      <a href="#menu">Основные блюда</a>
+      <a href="#menu">Закуски</a>
+      <a href="#menu">Десерты</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Информация</div>
+      <a href="#about">О нас</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#contact">Контакты</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Контакты</div>
+      <p>Адрес: ул. Примерная, 123, Воронеж</p>
+      <p>Телефон: +7 (123) 456-78-90</p>
+      <p>Email: info@ulethai.ru</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 ULE THAI. Все права защищены.</p>
+    <p><a href="#">Политика конфиденциальности</a> | <a href="#">Условия использования</a></p>
+  </div>
+</footer>
 
 <script>
 const modalOverlay   = document.getElementById('modalOverlay');
