@@ -1726,6 +1726,252 @@ footer {
   .contacts-grid { grid-template-columns: 1fr; }
   .contacts-socials { flex-direction: column; align-items: center; }
 }
+
+/* ═══════════════════════════════════════════
+   HERO — PREMIUM ENHANCEMENTS
+═══════════════════════════════════════════ */
+.hero-watermark {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none; z-index: 1; overflow: hidden;
+}
+.hero-watermark-text {
+  font-family: var(--serif);
+  font-size: clamp(7rem, 22vw, 19rem);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(212,175,55,0.055);
+  text-transform: uppercase;
+  letter-spacing: 18px;
+  user-select: none;
+  white-space: nowrap;
+}
+.hero-particles { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.particle {
+  position: absolute; bottom: -4px; border-radius: 50%;
+  background: var(--gold); opacity: 0;
+  animation: pFloat var(--dur,9s) ease-in infinite;
+  animation-delay: var(--delay,0s);
+  width: var(--sz,2px); height: var(--sz,2px);
+}
+@keyframes pFloat {
+  0%   { opacity: 0; transform: translateY(0) translateX(0) scale(0.3); }
+  8%   { opacity: 0.75; transform: translateY(-6vh) translateX(var(--dx,8px)) scale(1); }
+  92%  { opacity: 0.15; }
+  100% { opacity: 0; transform: translateY(-95vh) translateX(var(--dx2,20px)) scale(0.2); }
+}
+.hero-corner { position: absolute; width: 52px; height: 52px; z-index: 5; pointer-events: none; }
+.hero-corner::before, .hero-corner::after { content: ''; position: absolute; background: rgba(212,175,55,0.48); }
+.hero-corner::before { width: 100%; height: 1px; top: 0; left: 0; }
+.hero-corner::after  { width: 1px; height: 100%; top: 0; left: 0; }
+.hero-corner.tl { top: 32px; left: 32px; }
+.hero-corner.tr { top: 32px; right: 32px; transform: scaleX(-1); }
+.hero-corner.bl { bottom: 32px; left: 32px; transform: scaleY(-1); }
+.hero-corner.br { bottom: 32px; right: 32px; transform: scale(-1,-1); }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--sans); font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 4.5px; text-transform: uppercase; color: var(--gold);
+  border: 1px solid rgba(212,175,55,0.32); padding: 9px 24px;
+  margin-bottom: 26px; background: rgba(212,175,55,0.05);
+  backdrop-filter: blur(14px); opacity: 0; animation: fadeUp 1s forwards 0.1s;
+}
+.badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4ade80; box-shadow: 0 0 8px rgba(74,222,128,0.9);
+  animation: badgePulse 2s ease-in-out infinite;
+}
+@keyframes badgePulse {
+  0%,100% { box-shadow: 0 0 8px rgba(74,222,128,0.9); opacity:1; }
+  50%     { box-shadow: 0 0 3px rgba(74,222,128,0.3); opacity:0.5; }
+}
+.hero-divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s forwards 1.1s;
+}
+.hdiv-line { height: 1px; width: 64px; background: linear-gradient(to right, transparent, rgba(212,175,55,0.5)); }
+.hdiv-line.r { background: linear-gradient(to left, transparent, rgba(212,175,55,0.5)); }
+.hdiv-sym { color: rgba(212,175,55,0.65); font-size: 0.75rem; }
+.hero-infobar {
+  display: flex; align-items: stretch; justify-content: center;
+  background: rgba(0,12,12,0.96);
+  border-top: 1px solid rgba(212,175,55,0.2);
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+  position: relative; z-index: 20;
+  white-space: nowrap; flex-wrap: wrap;
+}
+.hinfo-item { padding: 15px 30px; text-align: center; border-right: 1px solid rgba(212,175,55,0.12); }
+.hinfo-item:last-child { border-right: none; }
+.hinfo-label { display: block; font-size: 0.5rem; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 4px; }
+.hinfo-val   { font-size: 0.8rem; color: rgba(255,255,255,0.82); font-weight: 300; letter-spacing: 0.3px; }
+
+/* ═══ MARQUEE ═══ */
+.marquee-strip {
+  background: linear-gradient(90deg, #002020 0%, #003030 50%, #002020 100%);
+  border-top: 1px solid rgba(212,175,55,0.22); border-bottom: 1px solid rgba(212,175,55,0.22);
+  overflow: hidden; position: relative; z-index: 10;
+}
+.marquee-strip::before, .marquee-strip::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none;
+}
+.marquee-strip::before { left: 0; background: linear-gradient(to right, #002020, transparent); }
+.marquee-strip::after  { right:0; background: linear-gradient(to left, #002020, transparent); }
+.marquee-track { display: flex; width: max-content; animation: marqueeScroll 34s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-item { display: flex; align-items: center; gap: 24px; padding: 15px 0; flex-shrink: 0; }
+.marquee-name {
+  font-family: var(--serif); font-size: 0.98rem; font-weight: 300;
+  color: rgba(255,255,255,0.62); letter-spacing: 3px; text-transform: uppercase; white-space: nowrap; padding: 0 10px;
+  transition: color 0.3s;
+}
+.marquee-item:hover .marquee-name { color: var(--gold); }
+.marquee-sep { color: var(--gold); font-size: 0.55rem; opacity: 0.5; flex-shrink: 0; }
+
+@media (max-width: 900px) {
+  .hero-corner { display: none; }
+@media (max-width: 680px) {
+  .hero-badge { font-size: 0.55rem; letter-spacing: 3px; padding: 7px 14px; }
+  .hero-watermark-text { display: none; }
+  .marquee-strip { display: none; }
+}
+
+/* ═══════════════════════════════════════════
+   PREMIUM MODAL BUTTONS
+═══════════════════════════════════════════ */
+.btn-submit {
+  width: 100%;
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: var(--sans);
+  display: block;
+}
+
+/* Основной слой — тёмный тил с золотым текстом */
+.btn-submit-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 18px 32px;
+  background: linear-gradient(135deg, #002e2e 0%, #004040 50%, #002e2e 100%);
+  background-size: 200% 100%;
+  color: var(--gold);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  border: 1px solid rgba(212,175,55,0.35);
+  position: relative;
+  z-index: 1;
+  transition:
+    background-position 0.6s var(--ease-out),
+    border-color 0.3s,
+    color 0.3s,
+    box-shadow 0.4s;
+}
+
+/* Золотой shimmer sweep */
+.btn-submit-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(212,175,55,0.18) 50%,
+    transparent 75%
+  );
+  transform: translateX(-100%) skewX(-12deg);
+  transition: transform 0s;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Золотая заливка при hover */
+.btn-submit-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-out);
+  z-index: 0;
+}
+
+.btn-submit:hover .btn-submit-inner {
+  border-color: var(--gold);
+  color: var(--wood);
+  box-shadow: 0 8px 32px rgba(212,175,55,0.3), 0 0 0 1px rgba(212,175,55,0.2);
+}
+.btn-submit:hover .btn-submit-inner::before {
+  transform: translateX(140%) skewX(-12deg);
+  transition: transform 0.7s ease;
+}
+.btn-submit:hover .btn-submit-inner::after { transform: scaleX(1); }
+
+.btn-submit:active .btn-submit-inner { transform: scale(0.985); }
+
+.btn-submit:disabled .btn-submit-inner {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Иконка-стрелка внутри кнопки */
+.btn-submit-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(212,175,55,0.4);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+  transition: border-color 0.3s, transform 0.35s var(--ease-elastic);
+}
+.btn-submit:hover .btn-submit-arrow {
+  border-color: rgba(30,21,14,0.4);
+  transform: translateX(3px);
+}
+
+/* Текст кнопки */
+.btn-submit-label { position: relative; z-index: 3; }
+
+/* Декоративная золотая линия сверху кнопки */
+.btn-submit::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,175,55,0.6), transparent);
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-submit:hover::before { opacity: 1; }
+
+/* Состояние загрузки */
+.btn-submit.loading .btn-submit-inner {
+  pointer-events: none;
+}
+.btn-submit.loading .btn-submit-arrow {
+  animation: btnSpin 0.8s linear infinite;
+}
+@keyframes btnSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body>
@@ -1744,16 +1990,66 @@ footer {
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
+
+  <div class="hero-watermark">
+    <span class="hero-watermark-text">ULE THAI</span>
+  </div>
+
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <div class="hero-corner tl"></div>
+  <div class="hero-corner tr"></div>
+  <div class="hero-corner bl"></div>
+  <div class="hero-corner br"></div>
+
   <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Воронеж · Открыто сейчас
+    </div>
+
     <div class="hero-eyebrow">Добро пожаловать в ULE THAI · Воронеж</div>
+
     <h1>Ощутите вкус<br><em>Таиланда</em></h1>
+
     <p class="hero-sub">Аутентичные рецепты, свежие ингредиенты и атмосфера тропического рая ждут вас.<br>Каждое блюдо — это история, каждая трапеза — приключение.</p>
+
+    <div class="hero-divider">
+      <span class="hdiv-line"></span>
+      <span class="hdiv-sym">✦</span>
+      <span class="hdiv-line r"></span>
+    </div>
+
     <div class="hero-actions">
       <a href="#menu" class="btn-primary">Посмотреть меню</a>
       <button onclick="openBookingModal()" class="btn-ghost">Забронировать стол</button>
     </div>
   </div>
+
+
 </section>
+
+<!-- ═══ HERO INFO BAR ═══ -->
+<div class="hero-infobar">
+  <div class="hinfo-item">
+    <span class="hinfo-label">Адрес</span>
+    <span class="hinfo-val">ул. Примерная, 123, Воронеж</span>
+  </div>
+  <div class="hinfo-item">
+    <span class="hinfo-label">Режим работы</span>
+    <span class="hinfo-val">12:00 — 23:00 ежедневно</span>
+  </div>
+  <div class="hinfo-item">
+    <span class="hinfo-label">Бронирование</span>
+    <span class="hinfo-val">+7 (123) 456-78-90</span>
+  </div>
+</div>
+<!-- ═══ MARQUEE STRIP ═══ -->
+<div class="marquee-strip">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+
 <!-- ═══ MENU ═══ -->
 <section class="menu-section" id="menu">
   <div class="menu-title-label">Меню</div>
@@ -2190,7 +2486,12 @@ footer {
       </div>
     </div>
     <div class="modal-foot" id="bookingFoot">
-      <button class="btn-submit" id="btnSubmitBooking">Отправить заявку</button>
+      <button class="btn-submit" id="btnSubmitBooking">
+  <div class="btn-submit-inner">
+    <span class="btn-submit-label">Отправить заявку</span>
+    <span class="btn-submit-arrow">→</span>
+  </div>
+</button>
     </div>
   </div>
 </div>
@@ -2223,7 +2524,12 @@ footer {
       </div>
     </div>
     <div class="modal-foot" id="cartFoot" style="display:none;">
-      <button class="btn-submit" id="btnSubmitOrder">Оформить заказ</button>
+      <button class="btn-submit" id="btnSubmitOrder">
+  <div class="btn-submit-inner">
+    <span class="btn-submit-label">Оформить заказ</span>
+    <span class="btn-submit-arrow">→</span>
+  </div>
+</button>
     </div>
   </div>
 </div>
@@ -2267,6 +2573,35 @@ footer {
 </footer>
 
 <script>
+
+// ── Частицы в герое ──
+(function() {
+  var c = document.getElementById('heroParticles');
+  if (!c) return;
+  for (var i = 0; i < 38; i++) {
+    var el = document.createElement('div');
+    el.className = 'particle';
+    var sz  = (Math.random() * 2.4 + 0.8).toFixed(1);
+    var lft = (Math.random() * 100).toFixed(1);
+    var dur = (Math.random() * 10 + 7).toFixed(1);
+    var del = (Math.random() * 14).toFixed(1);
+    var dx  = ((Math.random() - 0.5) * 60).toFixed(0);
+    var dx2 = ((Math.random() - 0.5) * 100).toFixed(0);
+    el.style.cssText = 'left:'+lft+'%;--sz:'+sz+'px;--dur:'+dur+'s;--delay:'+del+'s;--dx:'+dx+'px;--dx2:'+dx2+'px';
+    c.appendChild(el);
+  }
+})();
+
+// ── Marquee ──
+(function() {
+  var dishes = ['Том Ям','Пад Тай','Грин Карри','Том Кха','Массаман','Рис в ананасе','Лааб Му','Ям Вунсен','Kao СоЙ','Сифуд Пан','Пад Kao','Шейки','Пина Колада','Лимонад','Свинина в кисло-сладком'];
+  var track = document.getElementById('marqueeTrack');
+  if (!track) return;
+  var inner = dishes.map(function(d){ return '<div class="marquee-item"><span class="marquee-name">'+d+'</span><span class="marquee-sep">✦</span></div>'; }).join('');
+  track.innerHTML = inner + inner;
+})();
+
+
 // --- ОБЩИЕ НАСТРОЙКИ ---
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxDdzHlvN-hRQEsrlwhDPdXAxRDQQlN7_lq6zpWE56QR2kyr_ozQVpukS0KY91xIPJf/exec'; // ВСТАВЬ СВОЙ URL
 
@@ -2427,7 +2762,11 @@ document.getElementById('btnSubmitBooking').addEventListener('click', async () =
   };
 
   const btn = document.getElementById('btnSubmitBooking');
-  btn.innerText = 'Отправка...';
+  const label = btn.querySelector('.btn-submit-label');
+  const arrow = btn.querySelector('.btn-submit-arrow');
+  label.textContent = 'Отправка...';
+  arrow.textContent = '○';
+  btn.classList.add('loading');
   btn.disabled = true;
 
   try {
