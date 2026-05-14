@@ -2305,9 +2305,17 @@ function updateBadge() {
   const badge = document.getElementById('floatBadge');
   const btn = document.getElementById('floatingCart');
   const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-  
+
   badge.textContent = totalQty;
-  btn.style.display = totalQty > 0 ? 'flex' : 'none';
+  if (totalQty > 0) {
+    btn.style.display = 'flex';
+    btn.classList.add('show');
+    badge.classList.add('show');
+  } else {
+    btn.classList.remove('show');
+    badge.classList.remove('show');
+    btn.style.display = 'none';
+  }
 }
 
 function addToCart(name, price) {
@@ -2369,6 +2377,19 @@ function removeItem(idx) {
   renderCart();
 }
 
+function getCartSummary() {
+  if (!cart.length) return 'Пусто';
+  return cart
+    .map(i => `${i.name} × ${i.qty} = ${(i.price * i.qty).toLocaleString('ru-RU')} ₽`)
+    .join('\n');
+}
+
+function getCartTotalText() {
+  if (!cart.length) return '0 ₽';
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  return `${total.toLocaleString('ru-RU')} ₽`;
+}
+
 // Привязка кнопок "+" в меню
 document.addEventListener('click', e => {
   const btn = e.target.closest('.btn-add');
@@ -2392,23 +2413,37 @@ document.getElementById('btnSubmitBooking').addEventListener('click', async () =
   const time = document.getElementById('bookTime').value;
   const guests = document.getElementById('bookGuests').value;
 
-  if(!name || !phone || !date) return alert('Заполните имя, телефон и дату');
+  if (!name || !phone || !date) return alert('Заполните имя, телефон и дату');
 
   const payload = {
     type: 'Reservation',
-    name, phone, date, time, guests,
-    cart: '-', address: '-'
+    name,
+    phone,
+    date,
+    time,
+    guests,
+    address: '-',
+    cart: getCartSummary()
   };
 
-  document.getElementById('btnSubmitBooking').innerText = 'Отправка...';
+  const btn = document.getElementById('btnSubmitBooking');
+  btn.innerText = 'Отправка...';
+  btn.disabled = true;
+
   try {
-    await fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify(payload) });
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
     document.getElementById('bookingFormSection').style.display = 'none';
     document.getElementById('bookingFoot').style.display = 'none';
     document.getElementById('bookingSuccess').style.display = 'block';
-  } catch(e) {
+  } catch (e) {
     alert('Ошибка отправки');
-    document.getElementById('btnSubmitBooking').innerText = 'Отправить заявку';
+    btn.innerText = 'Отправить заявку';
+    btn.disabled = false;
   }
 });
 
@@ -2418,30 +2453,42 @@ document.getElementById('btnSubmitOrder').addEventListener('click', async () => 
   const phone = document.getElementById('orderPhone').value;
   const address = document.getElementById('orderAddress').value;
 
-  if(!name || !phone) return alert('Заполните имя и телефон');
-
-  const orderLines = cart.map(i => `${i.name} (x${i.qty})`).join('\n');
-  const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+  if (!name || !phone) return alert('Заполните имя и телефон');
+  if (!cart.length) return alert('Ваша корзина пуста');
 
   const payload = {
     type: 'Order',
-    name, phone, date: new Date().toLocaleDateString(), time: new Date().toLocaleTimeString(),
-    guests: '-', address,
-    cart: orderLines + `\nИтого: ${total} руб.`
+    name,
+    phone,
+    date: new Date().toLocaleDateString(),
+    time: new Date().toLocaleTimeString(),
+    guests: '-',
+    address,
+    cart: getCartSummary() + `\nИтого: ${getCartTotalText()}`
   };
 
-  document.getElementById('btnSubmitOrder').innerText = 'Отправка...';
+  const btn = document.getElementById('btnSubmitOrder');
+  btn.innerText = 'Отправка...';
+  btn.disabled = true;
+
   try {
-    await fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify(payload) });
-    cart = []; saveCart();
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    cart = [];
+    saveCart();
     document.getElementById('orderFormSection').style.display = 'none';
     document.getElementById('cartListUI').style.display = 'none';
     document.getElementById('cartTotalUI').style.display = 'none';
     document.getElementById('cartFoot').style.display = 'none';
     document.getElementById('orderSuccess').style.display = 'block';
-  } catch(e) {
+  } catch (e) {
     alert('Ошибка отправки');
-    document.getElementById('btnSubmitOrder').innerText = 'Оформить заказ';
+    btn.innerText = 'Оформить заказ';
+    btn.disabled = false;
   }
 });
 
